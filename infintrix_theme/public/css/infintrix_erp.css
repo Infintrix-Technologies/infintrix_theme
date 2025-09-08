@@ -1,0 +1,519 @@
+/* Clean Theme/*
+ * Theme: Fluent UI for Frappe
+ * Description: A modern, clean theme inspired by Microsoft's Fluent Design.
+ * This theme applies to both light and dark modes.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap');
+
+/* --- LIGHT THEME (DEFAULT) --- */
+[data-theme='light'] {
+    /* --- 1. Fluent Design Color & Style Palette --- */
+    --fluent-primary: #0078D4;
+    --fluent-primary-dark: #005A9E;
+    --fluent-background: #F3F2F1;  /* Off-white background */
+    --fluent-surface: #FFFFFF;     /* White for cards */
+    --fluent-surface-transparent: rgba(255, 255, 255, 0.8); /* Mica/Acrylic effect */
+    --fluent-text-primary: #323130;
+    --fluent-text-secondary: #605E5C;
+    --fluent-divider: #E1DFDD;
+    --fluent-shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+    --fluent-shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+    --fluent-shadow-lg: 0 8px 16px rgba(0,0,0,0.14);
+
+    /* --- 2. Override Core Frappe Variables --- */
+    --font-stack: 'Roboto', "InterVariable", "Inter", sans-serif;
+    --bg-color: var(--fluent-background);
+    --fg-color: var(--fluent-surface);
+    --navbar-bg: var(--fluent-surface-transparent);
+    --modal-bg: var(--fluent-surface);
+    --popover-bg: var(--fluent-surface);
+    --card-bg: var(--fluent-surface);
+    --primary: var(--fluent-primary);
+    --btn-primary: var(--fluent-primary);
+    --text-color: var(--fluent-text-primary);
+    --text-muted: var(--fluent-text-secondary);
+    --heading-color: var(--fluent-text-primary);
+    --border-color: var(--fluent-divider);
+    --table-border-color: var(--fluent-divider);
+    --control-bg: var(--fluent-surface);
+    --input-disabled-bg: #FAFAFA;
+    --highlight-color: rgba(0, 120, 212, 0.1);
+    --card-shadow: var(--fluent-shadow-md);
+    --modal-shadow: var(--fluent-shadow-lg);
+    --btn-shadow: none;
+}
+
+/* --- 3. Global & Layout Adjustments --- */
+[data-theme='light'] body,
+[data-theme='light'] .page-content {
+    background-color: var(--bg-color) !important;
+}
+
+[data-theme='light'] .layout-main-section {
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    box-shadow: var(--card-shadow) !important;
+}
+
+[data-theme='light'] .page-head {
+    background-color: transparent !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+[data-theme='light'] .page-title .title-text {
+    color: var(--heading-color) !important;
+}
+
+/* --- 4. Form & Input Fields Styling --- */
+[data-theme='light'] .frappe-control .control-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding-left: 2px;
+    margin-bottom: 4px;
+}
+
+[data-theme='light'] .form-control,
+[data-theme='light'] .awesomplete > input,
+[data-theme='light'] .like-disabled-input {
+    background-color: var(--control-bg) !important;
+    border: 1px solid var(--fluent-divider) !important;
+    border-radius: 4px !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    height: 32px !important;
+    padding: 6px 10px !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--fluent-shadow-sm) !important;
+}
+
+[data-theme='light'] .form-control:focus,
+[data-theme='light'] .awesomplete > input:focus {
+    border-color: var(--fluent-primary) !important;
+    box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.3) !important;
+}
+
+[data-theme='light'] .like-disabled-input {
+    background-color: var(--input-disabled-bg) !important;
+    box-shadow: none !important;
+}
+
+
+/* --- 5. Button Styling --- */
+[data-theme='light'] .btn {
+    font-weight: 600;
+    border-radius: 4px !important;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    box-shadow: var(--fluent-shadow-sm);
+}
+[data-theme='light'] .btn-primary {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: white !important;
+}
+[data-theme='light'] .btn-primary:hover {
+    background-color: var(--fluent-primary-dark) !important;
+    border-color: var(--fluent-primary-dark) !important;
+    box-shadow: var(--fluent-shadow-md);
+}
+[data-theme='light'] .btn-secondary {
+    background-color: var(--fluent-surface) !important;
+    color: var(--fluent-text-primary) !important;
+    border-color: var(--fluent-divider) !important;
+}
+[data-theme='light'] .btn-secondary:hover {
+    border-color: var(--fluent-primary) !important;
+    color: var(--fluent-primary) !important;
+}
+
+
+/* --- 6. Form Sections & Tabs --- */
+[data-theme='light'] .section-head {
+    font-size: var(--text-lg) !important;
+    color: var(--heading-color) !important;
+    padding: 8px 0 16px 0 !important;
+}
+
+[data-theme='light'] .form-tabs-list {
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--fg-color);
+}
+[data-theme='light'] .form-tabs .nav-link {
+    border-bottom: 2px solid transparent !important;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+[data-theme='light'] .form-tabs .nav-link.active {
+    color: var(--fluent-primary) !important;
+    border-color: var(--fluent-primary) !important;
+    background-color: transparent !important;
+}
+
+
+/* --- 7. Sidebar (Fluent UI Revamp) --- */
+[data-theme='light'] .desk-sidebar .standard-sidebar-item {
+    border-radius: 4px;
+    margin: 2px 0;
+    padding: 0;
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+
+[data-theme='light'] .desk-sidebar .standard-sidebar-item .item-anchor {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+}
+
+[data-theme='light'] .desk-sidebar .standard-sidebar-item:hover {
+    background-color: var(--highlight-color);
+}
+
+[data-theme='light'] .desk-sidebar .standard-sidebar-item.selected {
+    background-color: var(--highlight-color);
+}
+
+[data-theme='light'] .desk-sidebar .standard-sidebar-item.selected::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    background-color: var(--fluent-primary);
+    border-radius: 0 4px 4px 0;
+}
+
+[data-theme='light'] .desk-sidebar .standard-sidebar-item.selected .item-anchor {
+    padding-left: 16px;
+}
+
+[data-theme='light'] .desk-sidebar .standard-sidebar-item.selected .item-anchor .sidebar-item-label,
+[data-theme='light'] .desk-sidebar .standard-sidebar-item.selected .sidebar-item-icon .icon {
+    color: var(--fluent-primary) !important;
+    font-weight: 600;
+}
+
+[data-theme='light'] .desk-sidebar .standard-sidebar-item.selected .sidebar-item-icon .icon {
+     --icon-stroke: var(--fluent-primary) !important;
+}
+
+[data-theme='light'] .desk-sidebar .sidebar-item-control {
+    padding-right: 8px;
+}
+
+
+/* --- 8. Workspace / Dashboard --- */
+[data-theme='light'] .widget {
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--fluent-shadow-sm);
+}
+
+[data-theme='light'] .widget.shortcut-widget-box:hover {
+    border-color: var(--fluent-primary);
+    box-shadow: var(--fluent-shadow-md);
+}
+
+/* --- 9. Modal Styling (Fluent UI) --- */
+@keyframes fluent-modal-fade-in {
+    from { opacity: 0; transform: translateY(32px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fluent-modal-fade-out {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(32px) scale(0.97); }
+}
+
+[data-theme='light'] .modal.fade .modal-dialog {
+    opacity: 0;
+    transform: translateY(32px) scale(0.97);
+    transition: none;
+}
+[data-theme='light'] .modal.show .modal-dialog {
+    animation: fluent-modal-fade-in 0.32s cubic-bezier(.4,0,.2,1) forwards;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+[data-theme='light'] .modal:not(.show) .modal-dialog {
+    animation: fluent-modal-fade-out 0.22s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+[data-theme='light'] .modal-backdrop {
+    background: rgba(243,242,241,0.6) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: opacity 0.32s cubic-bezier(.4,0,.2,1);
+}
+[data-theme='light'] .modal-backdrop.fade {
+    opacity: 0;
+}
+[data-theme='light'] .modal-backdrop.show {
+    opacity: 1;
+}
+
+[data-theme='light'] .modal-content {
+    border: 1px solid var(--fluent-divider) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18), var(--modal-shadow) !important;
+    background: var(--fluent-surface-transparent);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: box-shadow 0.2s;
+}
+[data-theme='light'] .modal-header {
+    background-color: var(--fluent-surface) !important;
+    border-bottom: 1px solid var(--fluent-divider) !important;
+    border-radius: 12px 12px 0 0 !important;
+    padding-top: 20px;
+    padding-bottom: 16px;
+}
+[data-theme='light'] .modal-header .modal-title {
+    font-weight: 700;
+    font-size: 1.18rem;
+    letter-spacing: 0.01em;
+}
+[data-theme='light'] .modal-footer {
+    background-color: var(--fluent-background) !important;
+    border-top: 1px solid var(--fluent-divider) !important;
+    border-radius: 0 0 12px 12px !important;
+    padding-top: 16px;
+    padding-bottom: 20px;
+}
+
+/* --- 10. Tree View (Fluent UI - Revamped) --- */
+[data-theme='light'] .tree {
+    padding: var(--padding-sm);
+}
+[data-theme='light'] .tree-node {
+    position: relative;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+[data-theme='light'] .tree-node-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 4px;
+    margin: 1px 0;
+}
+[data-theme='light'] .tree-link {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    cursor: pointer;
+    flex-grow: 1;
+    min-width: 0;
+    border-radius: 4px;
+    transition: background-color 0.15s ease-in-out;
+}
+[data-theme='light'] .tree-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-primary) !important;
+    text-decoration: none !important;
+}
+[data-theme='light'] .tree-expander {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    margin-right: 4px;
+}
+[data-theme='light'] .tree-node.is-leaf > .tree-node-row .tree-expander {
+    visibility: hidden;
+}
+[data-theme='light'] .tree-node:not(.opened) > .tree-node-row .tree-expander {
+    transform: rotate(-90deg);
+}
+[data-theme='light'] .tree-link .icon,
+[data-theme='light'] .tree-link .es-icon {
+    margin-right: 8px;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    --icon-stroke: var(--text-secondary);
+}
+[data-theme='light'] .tree-children {
+    position: relative;
+    padding-left: 20px;
+    margin-left: 18px;
+    list-style: none;
+}
+[data-theme='light'] .tree-children::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--fluent-divider);
+}
+[data-theme='light'] .tree-children > .tree-node.is-last-child::before {
+    height: 18px;
+}
+[data-theme='light'] .tree-node::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: -20px;
+    width: 20px;
+    height: 1px;
+    background-color: var(--fluent-divider);
+}
+[data-theme='light'] .balance-area {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-feature-settings: "tnum";
+}
+[data-theme='light'] .tree-node-row:hover .tree-link {
+    background-color: var(--highlight-color);
+}
+[data-theme='light'] .tree-link.selected {
+    background-color: var(--highlight-color);
+}
+[data-theme='light'] .tree-link.selected::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    background-color: var(--fluent-primary);
+    border-radius: 0 4px 4px 0;
+}
+[data-theme='light'] .tree-link.selected .tree-label {
+    font-weight: 600;
+    color: var(--fluent-primary) !important;
+}
+[data-theme='light'] .tree-link.selected .icon,
+[data-theme='light'] .tree-link.selected .node-parent {
+    color: var(--fluent-primary);
+    --icon-stroke: var(--fluent-primary);
+}
+[data-theme='light'] .tree-node-toolbar {
+    display: none;
+    padding-right: 8px;
+    flex-shrink: 0;
+}
+[data-theme='light'] .tree-node-row:hover .tree-node-toolbar {
+    display: inline-flex;
+}
+
+
+/* --- 11. Navbar (Fluent UI Revamp) --- */
+[data-theme='light'] .navbar {
+    height: 52px;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding: 0 1rem;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+[data-theme='light'] #navbar-breadcrumbs {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    white-space: nowrap;
+}
+[data-theme='light'] #navbar-breadcrumbs li a {
+    color: var(--text-secondary);
+}
+[data-theme='light'] #navbar-breadcrumbs li.disabled a {
+    color: var(--text-primary) !important;
+    font-weight: 600;
+}
+[data-theme='light'] #navbar-breadcrumbs li:not(:first-child)::before {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="none" stroke="%23605E5C" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m6 4 4 4-4 4"/></svg>');
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 4px;
+    opacity: 0.8;
+}
+[data-theme='light'] #navbar-breadcrumbs a:before {
+    content: none !important; /* Remove old separator */
+}
+
+[data-theme='light'] .search-bar input {
+    border-radius: 20px !important;
+    border-color: var(--fluent-divider) !important;
+    height: 36px !important;
+    background-color: var(--fluent-background) !important;
+    transition: all 0.2s ease;
+}
+[data-theme='light'] .search-bar input:focus {
+    background-color: var(--fluent-surface) !important;
+    border-color: var(--fluent-primary) !important;
+    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2) !important;
+}
+[data-theme='light'] .search-bar .awesomplete > ul {
+    border-radius: 8px;
+    box-shadow: var(--fluent-shadow-lg);
+    margin-top: 4px;
+    border: 1px solid var(--fluent-divider);
+}
+/* [data-theme='light'] .navbar-nav .nav-item .btn-reset {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+} */
+[data-theme='light'] .navbar-nav .nav-item .btn-reset:hover {
+    background-color: var(--highlight-color);
+}
+[data-theme='light'] .dropdown-menu {
+    border-radius: 8px;
+    box-shadow: var(--fluent-shadow-lg);
+    border: 1px solid var(--border-color);
+}
+[data-theme='light'] .navbar .vertical-bar {
+    background-color: var(--fluent-divider);
+    width: 1px;
+    height: 24px;
+}
+
+/* .layout-main-section .frappe-list .result, .layout-main-section .frappe-list .no-result, .layout-main-section .frappe-list .freeze, .layout-main-section .report-wrapper .result, .layout-main-section .report-wrapper .no-result, .layout-main-section .report-wrapper .freeze {
+    min-height: calc(100vh - 284px);
+    overflow: scroll;
+    height :60vh
+} */ with #174A94 base */
+
+
+.no-click{
+    cursor:default !important;
+}
+
+.hide-side-section{
+    display: none !important;
+}
+
+.widget.menu-widget{
+    background-color: #d4daf9;
+    margin: 20px;
+}
+
+.widget-title .widget-title-text{
+    text-decoration: underline;
+    font-weight: 800;
+}
+
+.menu-widget:hover .widget-title .widget-title-text {
+    color: var(--gray-100);
+    text-decoration: none;
+}
+
+.menu-open-btn{
+    margin-right: var(--margin-sm);
+}

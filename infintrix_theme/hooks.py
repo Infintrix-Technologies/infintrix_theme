@@ -25,8 +25,10 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/infintrix_theme/css/infintrix_theme.css"
-# app_include_js = "/assets/infintrix_theme/js/infintrix_theme.js"
+app_include_css = ["/assets/infintrix_theme/css/infintrix_erp.css","/assets/infintrix_theme/js/custom-menu/build/menu.css"]
+
+app_include_js = ["/assets/infintrix_theme/js/infintrix_erp.js",
+                  "/assets/infintrix_theme/js/custom-menu/build/menu.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/infintrix_theme/css/infintrix_theme.css"

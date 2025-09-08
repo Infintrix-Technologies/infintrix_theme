@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html data-theme-mode="{{ desk_theme.lower() }}" data-theme="{{ desk_theme.lower() }}" dir={{ layout_direction }} lang="{{ lang }}">
+	<head>
+		<meta charset="UTF-8">
+		<!-- Chrome, Firefox OS and Opera -->
+		<meta name="theme-color" content="#0089FF">
+		<!-- Windows Phone -->
+		<meta name="msapplication-navbutton-color" content="#0089FF">
+		<!-- iOS Safari -->
+		<meta name="apple-mobile-web-app-status-bar-style" content="#0089FF">
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,
+			maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="white">
+		<meta name="mobile-web-app-capable" content="yes">
+		<title>{{ app_name }}</title>
+		<link rel="shortcut icon"
+			href="{{ favicon or "/assets/frappe/images/frappe-favicon.svg" }}" type="image/x-icon">
+		<link rel="icon"
+			href="{{ favicon or "/assets/frappe/images/frappe-favicon.svg" }}" type="image/x-icon">
+
+
+				<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family={{theme_settings.font_family or 'Cairo'}}:300,400,500,600,700,800,900">
+
+		{% for include in include_css -%}
+		{{ include_style(include) }}
+		{%- endfor -%}
+
+		<style>
+    html body {
+        font-family: "{{ theme_settings.font_family or 'Roboto' }}";
+        --text-base: {{ theme_settings.font_size or '14' }}px;
+
+        /* --- Main Theme Color --- */
+        /* Set the base color directly from the hex code */
+        --brand-color: {{ theme_color or '#3498db' }};
+
+        /* --- Generate Dynamic Shades and Tints --- */
+        /* Use color-mix() to create lighter (tints) and darker (shades) versions */
+        --brand-color-hover: color-mix(in srgb, var(--brand-color) 85%, black);
+
+        /* Lighter Tints (mixed with white) */
+        --brand-color-50: color-mix(in srgb, var(--brand-color) 5%, white);
+        --brand-color-100: color-mix(in srgb, var(--brand-color) 10%, white);
+        --brand-color-200: color-mix(in srgb, var(--brand-color) 25%, white);
+        --brand-color-300: color-mix(in srgb, var(--brand-color) 40%, white);
+        --brand-color-400: color-mix(in srgb, var(--brand-color) 55%, white);
+
+        /* Darker Shades (mixed with black) */
+        --brand-color-600: color-mix(in srgb, var(--brand-color) 85%, black);
+        --brand-color-700: color-mix(in srgb, var(--brand-color) 70%, black);
+        --brand-color-800: color-mix(in srgb, var(--brand-color) 55%, black);
+        --brand-color-900: color-mix(in srgb, var(--brand-color) 40%, black);
+
+        /* --- Apply Dynamic Variables --- */
+		/* --- 1. Fluent Design Color & Style Palette (Dynamic) --- */
+		--fluent-primary: var(--brand-color);
+		--fluent-primary-dark: var(--brand-color-900);
+		--fluent-background: #F3F2F1;  /* Off-white background */
+    	--fluent-surface: #FFFFFF;     /* White for cards */
+		--fluent-surface-transparent: rgba(255, 255, 255, 0.8); /* Mica effect */
+		--fluent-text-primary: #323130;
+		--fluent-text-secondary: #605E5C;
+		--fluent-divider: var(--brand-color-100);
+		--fluent-shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+		--fluent-shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+		--fluent-shadow-lg: 0 8px 16px rgba(0,0,0,0.14);
+
+		/* --- 2. Override Core Frappe Variables (Dynamic) --- */
+		--font-stack: '{{ theme_settings.font_family or "Roboto" }}', "InterVariable", "Inter", sans-serif;
+		--bg-color: var(--fluent-background);
+		--fg-color: var(--fluent-surface);
+		--navbar-bg: var(--fluent-surface-transparent);
+		--modal-bg: var(--fluent-surface);
+		--popover-bg: var(--fluent-surface);
+		--card-bg: var(--fluent-surface);
+		--primary: var(--fluent-primary);
+		--btn-primary: var(--fluent-primary);
+		--text-color: var(--fluent-text-primary);
+		--text-muted: var(--fluent-text-secondary);
+		--heading-color: var(--fluent-text-primary);
+		--border-color: var(--fluent-divider);
+		--table-border-color: var(--fluent-divider);
+		--control-bg: var(--fluent-surface);
+		--input-disabled-bg: #FAFAFA;
+		--highlight-color: color-mix(in srgb, var(--brand-color) 10%, #0078D4 10%, white 80%);
+		--card-shadow: var(--fluent-shadow-md);
+		--modal-shadow: var(--fluent-shadow-lg);
+		--btn-shadow: none;
+
+
+        {% if dark_theme != 'dark' %}
+            --table-border-color: var(--brand-color-300);
+            --border-color: #dddddd;
+            --subtle-fg: var(--brand-color-100);
+            --awesomplete-hover-bg: var(--brand-color-100);
+        {% endif %}
+    }
+	.layout-side-section {
+    display: none;
+}
+</style>
+
+		{% if lang == "eo" %}
+		<script type="text/javascript">
+			var _jipt = [];
+			_jipt.push(['project', 'frappe']);
+		</script>
+		<script type="text/javascript" src="https://cdn.crowdin.com/jipt/jipt.js"></script>
+		{% endif %}
+		<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+	</head>
+	<body>
+		{% include "templates/includes/splash_screen.html" %}
+
+		
+		<div id="app-root" style="display: flex; height: 100vh;">
+			
+			<!-- Sidebar Mount Point -->
+			<!-- <div id="sidebar" style="width: 250px; background:#1a1a40; color:#fff;"></div> -->
+			<!-- <div id="infintrixerp-menu"></div> -->
+			<!-- Main Section -->
+			<div class="main-section" style="flex:1;">
+				<header></header>
+				<div id="root"></div>
+				<div id="body"></div>
+				<footer></footer>
+			</div>
+		</div>
+		<div id="all-symbols" style="display:none"></div>
+		<div id="build-events-overlay"></div>
+
+		<script type="text/javascript">
+			window._version_number = "{{ build_version }}";
+			// browser support
+			window.app = true;
+			window.dev_server = {{ dev_server }};
+
+			if (!window.frappe) window.frappe = {};
+
+			frappe.boot = {{ boot | json }};
+			frappe._messages = frappe.boot["__messages"];
+			frappe.csrf_token = "{{ csrf_token }}";
+
+
+			{%- for path in include_icons -%}
+			fetch(`/assets/{{ path }}?v=${window._version_number}`, { credentials: "same-origin" })
+				.then((r) => r.text())
+				.then((svg) => {
+					let svg_container = document.getElementById("all-symbols");
+					svg_container.insertAdjacentHTML("beforeend", svg);
+				});
+			{%- endfor -%}
+		</script>
+
+	{% for include in include_js %}
+	{{ include_script(include) }}
+	{% endfor %}
+
+	{% include "templates/includes/app_analytics/google_analytics.html" %}
+
+		{% for sound in (sounds or []) %}
+		<audio preload="auto" id="sound-{{ sound.name }}" volume={{ sound.volume or 1 }}>
+			<source src="{{ sound.src }}"></source>
+		</audio>
+		{% endfor %}
+	</body>
+</html>
