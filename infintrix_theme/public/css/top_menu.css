@@ -1,0 +1,265 @@
+/*
+ * Infintrix Custom UI Components
+ * Description: Refactored styles for a workspace dropdown and a navigation bar.
+ * This file is structured to support both light and dark modes by separating
+ * theme-agnostic (layout, structure) styles from theme-dependent (color, shadow) styles.
+*/
+
+/* --- 1. THEME-AGNOSTIC STYLES (APPLY TO ALL THEMES) --- */
+
+/* --- Workspace Dropdown: Structure & Layout --- */
+.infintrix-workspace-dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.infintrix-dropdown-button {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-right: 10px;
+}
+
+.infintrix-dropdown-menu {
+    position: fixed;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: stretch;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 99999999;
+    width: 50%;
+}
+
+.infintrix-dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    min-height: 300px;
+    max-height: 60vh;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.infintrix-dropdown-item {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    flex: 1 1 calc(50% - 25%);
+    box-sizing: border-box;
+    background-color: color-mix(in srgb, var(--primary) 50%, var(--bg-color) 50%);
+}
+
+.infintrix-dropdown-item:hover {
+    transform: translateY(-5px);
+}
+
+.infintrix-dropdown-item-icon {
+    margin-right: 0;
+}
+
+.infintrix-dropdown-item-icon svg.icon {
+    width: 32px;
+    height: 32px;
+}
+
+/* --- Fluent Navbar: Structure & Layout --- */
+.infintrix-navbar {
+    backdrop-filter: blur(10px) saturate(180%);
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 100;
+}
+
+.infintrix-navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.infintrix-navbar-menu {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.infintrix-navbar-item {
+    position: relative;
+}
+
+.infintrix-navbar-link {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: block;
+    padding: 6px 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-radius: 4px;
+    margin: 6px 4px;
+    white-space: nowrap;
+}
+
+.infintrix-navbar-link:focus {
+    outline: none;
+}
+
+.infintrix-navbar-menu > .infintrix-navbar-item:has(.infintrix-navbar-submenu) > .infintrix-navbar-link {
+    padding-right: 30px;
+}
+
+.infintrix-navbar-menu > .infintrix-navbar-item:has(.infintrix-navbar-submenu) > .infintrix-navbar-link::after {
+    content: '▼';
+    font-size: 0.6em;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+}
+
+.infintrix-navbar-submenu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    border-radius: 6px;
+    min-width: 240px;
+    z-index: 10;
+    padding: 5px;
+    margin-top: 2px;
+}
+
+.infintrix-navbar-submenu .infintrix-navbar-link {
+    padding: 5px 8px;
+}
+
+.infintrix-navbar-item:hover > .infintrix-navbar-submenu {
+    display: block;
+}
+
+.infintrix-navbar-item:hover > .infintrix-navbar-link::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+
+/* --- 2. THEME-DEPENDENT STYLES (LIGHT MODE) --- */
+[data-theme='light'] {
+
+    /* --- Workspace Dropdown: Colors --- */
+    .infintrix-dropdown-button {
+        background-color: rgba(0, 0, 0, 0.07);
+        color: #555;
+    }
+
+    .infintrix-dropdown-button:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .infintrix-dropdown-menu {
+        background-color: color-mix(in srgb, var(--primary, #0078D4) 10%, #f5f5f5);
+    }
+
+    .infintrix-dropdown-item {
+        color: #333;
+    }
+
+    .infintrix-dropdown-item:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        background-color: #f5f5f5;
+    }
+
+    /* --- Fluent Navbar: Colors & Shadows --- */
+    .infintrix-navbar {
+        background-color: var(--navbar-bg, rgba(255, 255, 255, 0.8));
+        box-shadow: var(--fluent-shadow-sm, 0 1px 2px rgba(0,0,0,0.06));
+        border-bottom: 1px solid var(--border-color, #E1DFDD);
+    }
+
+    .infintrix-navbar-link {
+        color: var(--text-color, #323130);
+    }
+
+    .infintrix-navbar-link:hover,
+    .infintrix-navbar-link:focus {
+        background-color: var(--highlight-color, rgba(0, 120, 212, 0.1));
+        color: var(--fluent-primary, #0078D4);
+    }
+
+    .infintrix-navbar-menu > .infintrix-navbar-item:has(.infintrix-navbar-submenu) > .infintrix-navbar-link::after {
+        color: var(--text-muted, #605E5C);
+    }
+
+    .infintrix-navbar-submenu {
+        background-color: var(--popover-bg, #FFFFFF);
+        box-shadow: var(--modal-shadow, 0 8px 16px rgba(0,0,0,0.14));
+        border: 1px solid var(--border-color, #E1DFDD);
+    }
+}
+
+
+[data-theme='dark'] {
+
+    /* --- Workspace Dropdown: Colors --- */
+    .infintrix-dropdown-button {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #ccc;
+    }
+
+    .infintrix-dropdown-button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .infintrix-dropdown-menu {
+        background-color: color-mix(in srgb, var(--primary, #0078D4) 10%, #333);
+    }
+
+    .infintrix-dropdown-item {
+        color: #eee;
+    }
+
+    .infintrix-dropdown-item:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        background-color: #555;
+    }
+
+    /* --- Fluent Navbar: Colors & Shadows --- */
+    .infintrix-navbar {
+        background-color: var(--navbar-bg, rgba(0, 0, 0, 0.8));
+        box-shadow: var(--fluent-shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.4));
+        border-bottom: 1px solid var(--border-color, #444);
+    }
+
+    .infintrix-navbar-link {
+        color: var(--text-color, #ddd);
+    }
+
+    .infintrix-navbar-link:hover,
+    .infintrix-navbar-link:focus {
+        background-color: var(--highlight-color, rgba(0, 120, 212, 0.2));
+        color: var(--fluent-primary, #0078D4);
+    }
+
+    .infintrix-navbar-menu > .infintrix-navbar-item:has(.infintrix-navbar-submenu) > .infintrix-navbar-link::after {
+        color: var(--text-muted, #888);
+    }
+
+    .infintrix-navbar-submenu {
+        background-color: var(--popover-bg, #333);
+        box-shadow: var(--modal-shadow, 0 8px 16px rgba(0, 0, 0, 0.6));
+        border: 1px solid var(--border-color, #444);
+    }
+}
+
