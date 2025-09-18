@@ -83,12 +83,6 @@
 		--btn-shadow: none;
 
 
-        {% if dark_theme != 'dark' %}
-            --table-border-color: var(--brand-color-300);
-            --border-color: #dddddd;
-            --subtle-fg: var(--brand-color-100);
-            --awesomplete-hover-bg: var(--brand-color-100);
-        {% endif %}
     }
 	.layout-side-section {
     display: none;
@@ -102,10 +96,10 @@
 		</script>
 		<script type="text/javascript" src="https://cdn.crowdin.com/jipt/jipt.js"></script>
 		{% endif %}
-		<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 
 	</head>
 	<body>
+		
 		{% include "templates/includes/splash_screen.html" %}
 
 		
@@ -117,7 +111,7 @@
 			<!-- Main Section -->
 			<div class="main-section" style="flex:1;">
 				<header></header>
-				<div id="top_menu" style="z-index: 99999998;"></div>
+					<div id="top_menu" class="container" ></div>
 				<div id="body">
 					
 				</div>

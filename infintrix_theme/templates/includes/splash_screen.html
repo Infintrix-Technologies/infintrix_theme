@@ -1,0 +1,33 @@
+<!--
+InfintrixERP Theme
+By: Infintrix Technologies
+www.infintrixtech.com
+-->
+<div class="centered splash">
+	<style>
+    :root {
+      --spinner-color: {{theme_color or 'blue'}}; /* Default color: blue */
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(0, 0, 0, 0.1);
+      border-top: 5px solid var(--spinner-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 40px auto;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+
+	</style>
+	<img src="{{ splash_image or "/assets/infintrix_theme/images/erpleaf-logo.png" }}" style="max-width: 100px; max-height: 100px;">
+	<div class="spinner"></div>
+
+</div>

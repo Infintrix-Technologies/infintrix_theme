@@ -34,9 +34,6 @@ a[href*="support"] {
 body.full-width .container {
     width: 100% !important;
 }
-form.form-inline.fill-width {
-    justify-content: center !important;
-}
 
 /* --- Forms & Inputs --- */
 .frappe-control .control-label {
@@ -255,4 +252,12 @@ ul#awesomplete_list_1 {
 .awesomplete ul:not([hidden]) ~ #page-wrapper,
 #awesomplete_list_1:not([hidden]) ~ #page-wrapper {
   filter: blur(5px);
+}
+.page-container
+    {
+        background-color: color-mix(in srgb, var(--primary) 10%, var(--bg-color) 100%)
+    }
+svg.feather {
+    stroke: var(--icon-stroke);
+    stroke-width: 2px;
 }

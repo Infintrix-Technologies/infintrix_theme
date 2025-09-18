@@ -131,39 +131,6 @@ frappe.router.on("change", async () => {
 	}
 });
 
-function addFullscreenToggleButton() {
-	const fullscreenButton = document.createElement("button");
-	fullscreenButton.id = "fullscreenToggleButton";
-	fullscreenButton.textContent = "Toggle Fullscreen";
-	fullscreenButton.style.position = "fixed";
-	fullscreenButton.style.bottom = "10px";
-	fullscreenButton.style.right = "10px";
-	fullscreenButton.style.padding = "10px";
-	fullscreenButton.style.backgroundColor = "#007bff";
-	fullscreenButton.style.color = "#fff";
-	fullscreenButton.style.border = "none";
-	fullscreenButton.style.borderRadius = "5px";
-	fullscreenButton.style.cursor = "pointer";
-	fullscreenButton.style.zIndex = "1000";
-
-	const navbarNav = document.querySelector("body");
-	if (navbarNav) {
-		navbarNav.prepend(fullscreenButton);
-	}
-
-	fullscreenButton.addEventListener("click", () => {
-		if (!document.fullscreenElement) {
-			document.documentElement.requestFullscreen().catch((err) => {
-				console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
-			});
-		} else {
-			document.exitFullscreen().catch((err) => {
-				console.error(`Error attempting to exit fullscreen mode: ${err.message}`);
-			});
-		}
-	});
-}
-
 window.onload = async () => {
 	const response = await frappe.call({
 		method: "frappe.desk.desktop.get_workspace_sidebar_items",

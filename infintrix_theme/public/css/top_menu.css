@@ -31,7 +31,10 @@
     padding: 20px;
     box-sizing: border-box;
     z-index: 99999999;
-    width: 50%;
+    width: 50vw;
+    height: 80vh;
+    
+  
 }
 
 .infintrix-dropdown-menu ul {
@@ -39,8 +42,8 @@
     padding: 0;
     margin: 0;
     width: 100%;
-    min-height: 300px;
-    max-height: 60vh;
+    max-height: 100vh;
+    overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
@@ -48,22 +51,24 @@
 
 .infintrix-dropdown-item {
     cursor: pointer;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: transform 0.6s ease-in-out, box-shadow 0.2s ease-in-out;
     border-radius: 8px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
     text-align: center;
-    font-size: 14px;
+    font-size: 1.2rem;
     font-weight: 500;
     flex: 1 1 calc(50% - 25%);
     box-sizing: border-box;
-    background-color: color-mix(in srgb, var(--primary) 50%, var(--bg-color) 50%);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    /* background-color: color-mix(in srgb, var(--primary) 50%, var(--bg-color) 50%); */
 }
 
 .infintrix-dropdown-item:hover {
     transform: translateY(-5px);
+    background-color: color-mix(in srgb, var(--primary) 50%, var(--bg-color) 50%) !important;
 }
 
 .infintrix-dropdown-item-icon {
@@ -101,7 +106,7 @@
 }
 
 .infintrix-navbar-link {
-    text-decoration: none;
+    text-decoration: none !important;
     font-size: 14px;
     font-weight: 500;
     display: block;
@@ -184,8 +189,9 @@
     /* --- Fluent Navbar: Colors & Shadows --- */
     .infintrix-navbar {
         background-color: var(--navbar-bg, rgba(255, 255, 255, 0.8));
-        box-shadow: var(--fluent-shadow-sm, 0 1px 2px rgba(0,0,0,0.06));
         border-bottom: 1px solid var(--border-color, #E1DFDD);
+        border-radius: 50px !important;
+
     }
 
     .infintrix-navbar-link {
@@ -194,8 +200,10 @@
 
     .infintrix-navbar-link:hover,
     .infintrix-navbar-link:focus {
-        background-color: var(--highlight-color, rgba(0, 120, 212, 0.1));
-        color: var(--fluent-primary, #0078D4);
+        /* background-color: var(--highlight-color, rgba(0, 120, 212, 0.1)); */
+        color: var(--text-dark);
+        background-color: var(--fluent-primary);
+        text-decoration: none !important;
     }
 
     .infintrix-navbar-menu > .infintrix-navbar-item:has(.infintrix-navbar-submenu) > .infintrix-navbar-link::after {
@@ -238,8 +246,9 @@
     /* --- Fluent Navbar: Colors & Shadows --- */
     .infintrix-navbar {
         background-color: var(--navbar-bg, rgba(0, 0, 0, 0.8));
-        box-shadow: var(--fluent-shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.4));
         border-bottom: 1px solid var(--border-color, #444);
+         border-radius: 50px !important;
+       
     }
 
     .infintrix-navbar-link {
@@ -263,3 +272,8 @@
     }
 }
 
+
+
+ .sticky-top {
+    background-color: var(--primary);
+}
