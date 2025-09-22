@@ -34,15 +34,7 @@ Frappe Theme
 You can install this app using the [bench](https://github.com/frappe/bench) CLI:  
 
 ```bash
-cd $PATH_TO_YOUR_BENCH
+
 bench get-app https://github.com/Infintrix-Technologies/infintrix_theme --branch develop
 bench install-app infintrix_theme
 
-
-Contributing
-
-This app uses pre-commit for code formatting and linting. Please install pre-commit
- and enable it for this repository:
-
-cd apps/infintrix_theme
-pre-commit install
