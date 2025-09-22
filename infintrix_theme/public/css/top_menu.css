@@ -188,7 +188,7 @@
 
     /* --- Fluent Navbar: Colors & Shadows --- */
     .infintrix-navbar {
-        background-color: var(--navbar-bg, rgba(255, 255, 255, 0.8));
+        background-color: color-mix(in srgb, var(--primary, #0078D4) 50%, var(--navbar-bg, rgba(0, 0, 0, 0.8)) 50%);
         border-bottom: 1px solid var(--border-color, #E1DFDD);
         border-radius: 50px !important;
 
@@ -245,7 +245,7 @@
 
     /* --- Fluent Navbar: Colors & Shadows --- */
     .infintrix-navbar {
-        background-color: var(--navbar-bg, rgba(0, 0, 0, 0.8));
+        background-color: color-mix(in srgb, var(--primary, #0078D4) 50%, var(--navbar-bg, rgba(0, 0, 0, 0.8)) 50%);
         border-bottom: 1px solid var(--border-color, #444);
          border-radius: 50px !important;
        

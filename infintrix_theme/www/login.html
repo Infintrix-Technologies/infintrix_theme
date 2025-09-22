@@ -1,0 +1,242 @@
+<!--
+Data Value Theme
+By: Abdo Hamoud
+www.abdo-host.com
+-->
+{% extends "templates/web.html" %}
+
+{% macro email_login_body() -%}
+<div class="page-card-body">
+	<div class="form-group">
+		<div class="email-field">
+			<input type="text" id="login_email" class="form-control" placeholder="{{ login_label or _("Email or Username")}}" required autofocus>
+			<svg class="field-icon email-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
+				 xmlns="http://www.w3.org/2000/svg">
+				<path
+						d="M2.5 7.65149V15.0757C2.5 15.4374 2.64367 15.7842 2.8994 16.04C3.15513 16.2957 3.50198 16.4394 3.86364 16.4394H16.1364C16.498 16.4394 16.8449 16.2957 17.1006 16.04C17.3563 15.7842 17.5 15.4374 17.5 15.0757V7.65149"
+						stroke="#74808B" stroke-miterlimit="10" stroke-linecap="square"/>
+				<path
+						d="M17.5 7.57572V5.53026C17.5 5.1686 17.3563 4.82176 17.1006 4.56603C16.8449 4.31029 16.498 4.16663 16.1364 4.16663H3.86364C3.50198 4.16663 3.15513 4.31029 2.8994 4.56603C2.64367 4.82176 2.5 5.1686 2.5 5.53026V7.57572L10 10.8333L17.5 7.57572Z"
+						stroke="#74808B" stroke-miterlimit="10" stroke-linecap="square"/>
+			</svg>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="password-field">
+			<input type="password" id="login_password" class="form-control" placeholder="{{ _("Password") }}" autocomplete="current-password" required>
+			<svg class="field-icon password-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
+				 xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" clip-rule="evenodd"
+					  d="M10.0961 1.93768H10.0264C8.94806 1.92763 7.90976 2.34591 7.13951 3.10075C6.36866 3.85619 5.9294 4.88687 5.91833 5.96612L5.91831 5.96612V5.97124V6.52695H4.3125C3.20793 6.52695 2.3125 7.42238 2.3125 8.52695V16.0165C2.3125 17.121 3.20793 18.0165 4.3125 18.0165H15.7356C16.8401 18.0165 17.7356 17.121 17.7356 16.0165V8.52695C17.7356 7.42238 16.8401 6.52695 15.7356 6.52695H14.1297V6.04576C14.1397 4.96742 13.7214 3.92913 12.9666 3.15888C12.2112 2.38803 11.1805 1.94877 10.1012 1.9377V1.93768H10.0961ZM13.1297 6.52695V6.04336V6.03838H13.1297C13.1378 5.22428 12.8222 4.44029 12.2524 3.85881C11.6831 3.27793 10.9067 2.94667 10.0934 2.93768H10.024H10.019V2.93765C9.20491 2.92955 8.42092 3.24512 7.83944 3.81497C7.25856 4.38423 6.9273 5.1607 6.91831 5.9739V6.52695H13.1297ZM4.3125 7.52695C3.76022 7.52695 3.3125 7.97467 3.3125 8.52695V16.0165C3.3125 16.5687 3.76022 17.0165 4.3125 17.0165H15.7356C16.2879 17.0165 16.7356 16.5687 16.7356 16.0165V8.52695C16.7356 7.97467 16.2879 7.52695 15.7356 7.52695H4.3125ZM10.0242 13.2384C10.5581 13.2384 10.9909 12.8056 10.9909 12.2717C10.9909 11.7377 10.5581 11.3049 10.0242 11.3049C9.49023 11.3049 9.05738 11.7377 9.05738 12.2717C9.05738 12.8056 9.49023 13.2384 10.0242 13.2384ZM11.9909 12.2717C11.9909 13.3579 11.1104 14.2384 10.0242 14.2384C8.93794 14.2384 8.05738 13.3579 8.05738 12.2717C8.05738 11.1854 8.93794 10.3049 10.0242 10.3049C11.1104 10.3049 11.9909 11.1854 11.9909 12.2717Z"
+					  fill="#74808B"/>
+			</svg>
+			<span toggle="#login_password" class="toggle-password text-muted">
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye font-small-4"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+			</span>
+		</div>
+	</div>
+</div>
+
+<div class="page-card-actions">
+	<div class="row">
+		<div class="col-md-6">
+			<button class="btn btn-sm btn-primary btn-block btn-login" type="submit"> {{ _("Login") }}</button>
+			{% if ldap_settings and ldap_settings.enabled %}
+			<button class="btn btn-sm btn-default btn-block btn-login btn-ldap-login"> {{ _("Login with LDAP") }}</button>
+			{% endif %}
+		</div>
+		<div class="col-md-6 text-right">
+			<div class="forgot-password-message"><a href="#forgot">{{ _("Forgot Password?") }}</a></div>
+		</div>
+	</div>
+</div>
+{% endmacro %}
+
+{% block head_include %}
+<link type="text/css" rel="stylesheet" href="/assets/css/login.css">
+{% endblock %}
+
+{% macro logo_section() %}
+<div class="page-card-head">
+    <div class="text-left">
+        <h2>{{ _('Welcome Back')}}</h2>
+        <p class="text-secondary font-size-md">{{ _('Login your account and start your business') }}</p>
+    </div>
+</div>
+{% endmacro %}
+
+{% block page_content %}
+<!-- {{ for_test }} -->
+<div>
+	<noscript>
+		<div class="text-center my-5">
+			<h4>{{ _("Javascript is disabled on your browser") }}</h4>
+			<p class="text-muted"> {{ _("You need to enable JavaScript for your app to work.") }}<br>{{ _("To enable it follow the instructions in the following link: {0}").format("<a href='https://enable-javascript.com/'>enable-javascript.com</a></p>") }}
+		</div>
+	</noscript>
+	<section class='for-login'>
+		<div class="login-content page-card">
+			<div class="login-content-bg">
+				<img class="app-logo" src="{{ logo }}">
+				<div data-action="login-api"></div>
+			</div>
+			<div class="login-content-form">
+				{{ logo_section() }}
+				<form class="form-signin form-login" role="form">
+					{%- if social_login -%}
+					<div class="page-card-body">
+						<div class="social-logins text-center">
+							<div class="social-login-buttons">
+								{% for provider in provider_logins %}
+								<div class="login-button-wrapper">
+									<a href="{{ provider.auth_url }}"
+										class="btn btn-block btn-default btn-sm btn-login-option btn-{{ provider.name }}">
+										{% if provider.icon %}
+											{{ provider.icon }}
+										{% endif %}
+										{{ _("Login With {0}").format(provider.provider_name) }}</a>
+								</div>
+								{% endfor %}
+								<p class="text-muted login-divider">{{ _("or") }}</p>
+							</div>
+						</div>
+						<a href="#email"
+							class="btn btn-block btn-default btn-sm btn-login-option">
+						 {{ _("Login With Email") }}</a>
+					</div>
+					{% else %}
+						{{ email_login_body() }}
+					{%- endif -%}
+				</form>
+				{%- if not disable_signup -%}
+				<div class="text-center sign-up-message">
+					{{ _("Don't have an account?") }}
+					<a href="#signup">{{ _("Sign up") }}</a>
+				</div>
+				{%- endif -%}
+			</div>
+		</div>
+	</section>
+
+	{%- if social_login -%}
+	<section class='for-email-login'>
+		<div class="login-content page-card">
+			{{ logo_section() }}
+			<form class="form-signin form-login" role="form">
+			{{ email_login_body() }}
+			</form>
+		</div>
+		{%- if not disable_signup -%}
+		<div class="text-center sign-up-message">
+			{{ _("Don't have an account?") }}
+			<a href="#signup">{{ _("Sign up") }}</a>
+		</div>
+		{%- endif -%}
+	</section>
+	{%- endif -%}
+	<section class='for-signup {{ "signup-disabled" if disable_signup else "" }}'>
+		<div class="login-content page-card">
+			<div class="login-content-bg">
+				<img class="app-logo" src="{{ logo }}">
+				<div data-action="login-api"></div>
+			</div>
+			<div class="login-content-form">
+				{%- if not disable_signup -%}
+					<div class="page-card-head">
+						<div class="text-left">
+							<h2>{{ _('New Account')}}</h2>
+							<p class="text-secondary font-size-md">{{ _('Register new account to complete your work') }}</p>
+						</div>
+					</div>
+					<form class="form-signin form-signup hide" role="form">
+						<div class="page-card-body">
+							<div class="form-group">
+								<div class="email-field">
+									<input type="text" id="signup_fullname" class="form-control" placeholder="{{ _("Full Name") }}" required autofocus>
+									<span class="field-icon">
+										<i class="fal fa-user-circle text-secondary"></i>
+									</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="email-field">
+									<input type="email" id="signup_email" class="form-control" placeholder="{{ _(" Email") }}" autocomplete="current-password" required>
+									<span class="field-icon">
+										<i class="fal fa-envelope text-secondary"></i>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="page-card-actions">
+							<button class="btn btn-sm btn-primary btn-block btn-signup" type="submit">{{ _("Sign up") }}</button>
+							<p class="text-center sign-up-message">
+								<a href="#login" class="blue"><i class="far fa-user"></i> {{ _("Have an account? Login") }}</a>
+							</p>
+						</div>
+					</form>
+					{%- else -%}
+					<div class='page-card-head'>
+						<span class='indicator gray'>{{_("Signup Disabled")}}</span>
+					</div>
+					<p>{{_("Signups have been disabled for this website.")}}</p>
+					<div><a href='/' class='btn btn-primary btn-sm'>{{ _("Home") }}</a></div>
+				{%- endif -%}
+			</div>
+		</div>
+
+	</section>
+
+	<section class='for-forgot'>
+		<div class="login-content page-card">
+			<div class="login-content-bg">
+				<img class="app-logo" src="{{ logo }}">
+				<div data-action="login-api"></div>
+			</div>
+			<div class="login-content-form">
+				<form class="form-signin form-forgot hide" role="form">
+					<div class="page-card-head">
+						<div class="text-left">
+							<h2>{{ _('Forgot Password') }}</h2>
+							<p class="text-secondary font-size-md">{{ _('Write your email to reset password') }}</p>
+						</div>
+					</div>
+					<div class="page-card-body">
+						<div class="email-field">
+							<input type="email" id="forgot_email" class="form-control"
+								   placeholder="{{ _('Email Address') }}" required autofocus>
+							<svg class="field-icon email-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
+								 xmlns="http://www.w3.org/2000/svg">
+								<path
+										d="M2.5 7.65149V15.0757C2.5 15.4374 2.64367 15.7842 2.8994 16.04C3.15513 16.2957 3.50198 16.4394 3.86364 16.4394H16.1364C16.498 16.4394 16.8449 16.2957 17.1006 16.04C17.3563 15.7842 17.5 15.4374 17.5 15.0757V7.65149"
+										stroke="#74808B" stroke-miterlimit="10" stroke-linecap="square"/>
+								<path
+										d="M17.5 7.57572V5.53026C17.5 5.1686 17.3563 4.82176 17.1006 4.56603C16.8449 4.31029 16.498 4.16663 16.1364 4.16663H3.86364C3.50198 4.16663 3.15513 4.31029 2.8994 4.56603C2.64367 4.82176 2.5 5.1686 2.5 5.53026V7.57572L10 10.8333L17.5 7.57572Z"
+										stroke="#74808B" stroke-miterlimit="10" stroke-linecap="square"/>
+							</svg>
+
+						</div>
+					</div>
+					<div class="page-card-actions">
+						<button class="btn btn-sm btn-primary btn-block btn-forgot" type="submit">{{ _("Reset Password") }}
+						</button>
+						<p class="text-center sign-up-message">
+							<a href="#login">{{ _("Back to Login") }}</a>
+						</p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script>{% include "templates/includes/login/login.js" %}</script>
+<script>
+  $('[data-action="login-api"]').html(unescape('%3c%69%6d%67%20%63%6c%61%73%73%3d%22%61%70%70%2d%6c%6f%67%69%6e%2d%62%67%22%20%73%72%63%3d%22%2f%61%73%73%65%74%73%2f%64%61%74%61%76%61%6c%75%65%5f%74%68%65%6d%65%5f%31%35%2f%69%6d%61%67%65%73%2f%65%72%70%6e%65%78%74%2d%68%65%72%6f%2d%63%6f%6d%70%72%65%73%73%65%64%2e%70%6e%67%22%3e%0d%0a%3c%64%69%76%20%63%6c%61%73%73%3d%22%74%65%78%74%2d%63%65%6e%74%65%72%20%6c%6f%67%69%6e%2d%63%6f%70%79%72%69%67%68%74%73%22%3e%50%6f%77%65%72%65%64%20%42%79%20%3c%61%20%68%72%65%66%3d%22%68%74%74%70%73%3a%2f%2f%69%6e%66%69%6e%74%72%69%78%74%65%63%68%2e%63%6f%6d%2f%22%20%74%61%72%67%65%74%3d%22%5f%62%6c%61%6e%6b%22%3e%49%6e%66%69%6e%74%72%69%78%20%54%65%63%68%6e%6f%6c%6f%67%69%65%73%3c%2f%61%3e%3c%2f%64%69%76%3e'));
+</script>
+
+{% endblock %}
+
+{% block sidebar %}{% endblock %}

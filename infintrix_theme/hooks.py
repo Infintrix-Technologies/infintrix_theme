@@ -96,12 +96,12 @@ app_include_js = [
 # ------------
 
 # before_install = "infintrix_theme.install.before_install"
-# after_install = "infintrix_theme.install.after_install"
+after_install = "infintrix_theme.install.after_install"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "infintrix_theme.uninstall.before_uninstall"
+before_uninstall = "infintrix_theme.install.before_uninstall"
 # after_uninstall = "infintrix_theme.uninstall.after_uninstall"
 
 # Integration Setup

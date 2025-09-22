@@ -53,7 +53,7 @@
     .layout-main-section {
         border: 1px solid var(--border-color) !important;
         box-shadow: var(--card-shadow) !important;
-        background-color: color-mix(in srgb, var(--primary) 10%, var(--fg-color) 100%);
+        /* background-color: color-mix(in srgb, var(--primary) 10%, var(--fg-color) 100%); */
 
     }
 
@@ -156,8 +156,8 @@
     .widget {
         border: 1px solid var(--border-color);
         box-shadow: var(--fluent-shadow-sm);
-        background-color:
-            color-mix(in srgb, var(--primary) 20%, white 50%) !important;
+        /* background-color:
+            color-mix(in srgb, var(--primary) 20%, white 50%) !important; */
         border-radius: 15px;
         padding: 14px;
     }
