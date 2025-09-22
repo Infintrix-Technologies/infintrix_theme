@@ -8,6 +8,7 @@
   "font_family",
   "color",
   "font_size",
+  "disable_splash",
   "column_break_pfzv",
   "font_preview"
  ],
@@ -41,13 +42,19 @@
   {
    "fieldname": "column_break_pfzv",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "disable_splash",
+   "fieldtype": "Check",
+   "label": "Disable Splash"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-09-22 05:06:35.161629",
+ "modified": "2025-09-22 05:57:11.408310",
  "modified_by": "Administrator",
  "module": "Infintrix Theme",
  "name": "Theme Settings",

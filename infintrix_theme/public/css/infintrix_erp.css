@@ -423,3 +423,19 @@ input[type=checkbox]:checked {
     box-shadow: none;
     border: none;
 }
+
+
+.frappe-control .link-btn {
+    background-color: transparent !important;
+    display: inline !important;
+    position: absolute;
+    right: 2.5rem;
+}
+.layout-main-section .awesomplete {
+    display: flex;
+}
+
+.layout-main-section .awesomplete > [role=listbox] {
+    width: 80% !important;
+
+}

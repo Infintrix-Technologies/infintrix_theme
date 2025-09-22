@@ -99,8 +99,11 @@
 
 	</head>
 	<body>
-		
+
+		{% if not disable_splash %}
 		{% include "templates/includes/splash_screen.html" %}
+		{% endif %}
+		
 
 		
 		<div id="app-root" style="display: flex; height: 100vh;">

@@ -1,44 +1,4 @@
-// $(document).ready(() => {
-//   // Function to inject + button
-//   function addQuickEntryButtons() {
-//     document.querySelectorAll('.awesomplete').forEach(wrapper => {
-//       const input = wrapper.querySelector('input[data-fieldtype="Link"]');
-//       if (!input) return;
 
-//       // Avoid adding duplicate buttons
-//       if (wrapper.querySelector('.link-add-btn')) return;
-
-//       // Create button
-//       const btn = document.createElement('button');
-//       btn.innerHTML = '+';
-//       btn.type = 'button';
-//       btn.className = 'link-add-btn btn btn-xs btn-default';
-//       btn.style.marginLeft = '4px';
-
-//       // Handle click -> open Quick Entry for the target doctype
-//       btn.addEventListener('click', () => {
-//         const doctype = input.getAttribute('data-target');
-//         if (doctype) {
-//           frappe.new_doc(doctype); // opens quick entry modal
-//         }
-//       });
-
-//       // Insert button after input
-//       wrapper.appendChild(btn);
-//     });
-//   }
-
-//   // Run once at load
-//   addQuickEntryButtons();
-
-//   // Also re-run whenever forms/fields refresh
-//   frappe.ui.form.on('*', {
-//     refresh() {
-//       console.log('Refreshing form - adding quick entry buttons if needed');
-//       addQuickEntryButtons();
-//     }
-//   });
-// });
 
 $(document).ready(() => {
 	function addFullscreenToggleButton() {
@@ -266,3 +226,98 @@ $(document).ready(() => {
 	addThemeToggleButton();
 	addLanguageSwitchButton()
 });
+
+(function () {
+  // Helper to open new doc (prefer frappe.new_doc)
+  function openNewDoc(doctype) {
+    try {
+      if (window.frappe && typeof window.frappe.new_doc === "function") {
+        window.frappe.new_doc(doctype);
+        return;
+      }
+    } catch (err) {
+      console.warn("frappe.new_doc failed:", err);
+    }
+    // fallback to Desk route
+    window.open("/app/" + encodeURIComponent(doctype) + "/new", "_blank");
+  }
+
+  function addButton(input) {
+    if (input.dataset._btnAdded === "1") return;
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = "+";
+    btn.className = "link-add-btn btn-primary";
+    btn.style.padding = "4px 10px";
+    btn.style.border = "1px solid #ccc";
+    btn.style.borderRadius = "4px";
+    btn.style.background = "#f8f9fa";
+    btn.style.cursor = "pointer";
+    btn.style.marginLeft = "4px";
+
+    btn.addEventListener("click", () => {
+      const target = input.dataset.target || input.dataset.doctype || "record";
+      openNewDoc(target);
+    });
+
+    input.insertAdjacentElement("afterend", btn);
+    input.dataset._btnAdded = "1";
+  }
+
+  function processAll() {
+    document.querySelectorAll('input[data-fieldtype="Link"]').forEach(addButton);
+  }
+
+  // Initial run once DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", processAll);
+  } else {
+    processAll();
+  }
+
+  // Watch for dynamically inserted fields
+  const mo = new MutationObserver(() => processAll());
+  mo.observe(document.body, { childList: true, subtree: true });
+})();
+
+// (function () {
+//   function addButton(input) {
+//     if (input.dataset._btnAdded === "1") return;
+
+//     const btn = document.createElement("button");
+//     btn.type = "button";
+//     btn.textContent = "+";
+//     btn.className = "link-add-btn btn-primary";
+//     btn.style.padding = "4px 10px";
+//     btn.style.border = "1px solid #ccc";
+//     btn.style.borderRadius = "4px";
+//     btn.style.background = "#f8f9fa";
+//     btn.style.cursor = "pointer";
+
+//     btn.addEventListener("click", () => {
+//       const target = input.dataset.target || input.dataset.doctype || "record";
+//       alert("Create new " + target);
+//       // if frappe available:
+//       // frappe.new_doc(target);
+//     });
+
+//     input.insertAdjacentElement("afterend", btn);
+//     input.dataset._btnAdded = "1";
+//   }
+
+//   function processAll() {
+//     document.querySelectorAll('input[data-fieldtype="Link"]').forEach(addButton);
+//   }
+
+//   // Initial run once DOM is ready
+//   if (document.readyState === "loading") {
+//     document.addEventListener("DOMContentLoaded", processAll);
+//   } else {
+//     processAll();
+//   }
+
+//   // Watch for dynamically inserted fields
+//   const mo = new MutationObserver(() => processAll());
+//   mo.observe(document.body, { childList: true, subtree: true });
+// })();
