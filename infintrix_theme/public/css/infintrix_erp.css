@@ -437,5 +437,5 @@ input[type=checkbox]:checked {
 
 .layout-main-section .awesomplete > [role=listbox] {
     width: 80% !important;
-
+    top: 2rem !important;
 }

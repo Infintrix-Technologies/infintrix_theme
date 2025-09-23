@@ -20,6 +20,7 @@
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     margin-right: 10px;
+    border : 0 !important;
 }
 
 .infintrix-dropdown-menu {
