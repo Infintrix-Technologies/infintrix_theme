@@ -30,6 +30,7 @@ app_include_css = [
     "/assets/infintrix_theme/css/infintrix_light.css",
     "/assets/infintrix_theme/css/infintrix_dark.css",
     "/assets/infintrix_theme/css/top_menu.css",
+    "/assets/infintrix_theme/js/sidebar_menu/build/sidebar.css"
     # "/assets/infintrix_theme/css/submenu.css",
     #    "/assets/infintrix_theme/js/custom-menu/build/menu.css"
 ]
@@ -37,6 +38,7 @@ app_include_css = [
 app_include_js = [
     "/assets/infintrix_theme/js/infintrix_erp.js",
     "/assets/infintrix_theme/js/top_menu.js",
+    "/assets/infintrix_theme/js/sidebar_menu/build/sidebar.js"
     #  "/assets/infintrix_theme/js/submenu.js",
     #   "/assets/infintrix_theme/js/custom-menu/build/menu.js"
 ]

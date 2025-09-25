@@ -1,0 +1,279 @@
+<style>
+    :root {
+        --sidebar-left-width: 80px;
+        --sidebar-right-width: 280px;
+        --navbar-dark-primary: #18283b;
+        --navbar-dark-secondary: #2c3e50;
+        --navbar-light-primary: #f5f6fa;
+        --navbar-light-secondary: #8392a5;
+        --background: #9c88ff;
+    }
+
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    #app-container {
+        display: flex;
+        height: 100vh;
+    }
+
+    /* ---------- LEFT COLUMN ---------- */
+    #sidebar-left {
+        width: var(--sidebar-left-width);
+        background: var(--navbar-dark-primary);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        color: var(--navbar-light-primary);
+        flex-shrink: 0;
+    }
+
+    #sidebar-left .icon-btn {
+        width: 50px;
+        height: 50px;
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        color: var(--navbar-light-secondary);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background .2s, color .2s, transform .2s;
+    }
+
+    #sidebar-left .icon-btn.active {
+        background: var(--navbar-light-primary);
+        color: var(--navbar-dark-primary);
+        transform: scale(1.1);
+    }
+
+    #sidebar-left .icon-btn:hover {
+        background: var(--navbar-light-primary);
+        color: var(--navbar-dark-primary);
+    }
+
+    /* Toggle button for right sidebar */
+    #sidebar-left #toggle-btn {
+        margin-bottom: 2rem;
+        margin-top: 0;
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+    }
+
+    #sidebar-left #toggle-btn.is-collapsed {
+        transform: rotate(180deg);
+    }
+
+    /* ---------- RIGHT COLUMN ---------- */
+    #sidebar-right {
+        width: var(--sidebar-right-width);
+        background: var(--navbar-dark-secondary);
+        color: var(--navbar-light-primary);
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        transition: width 0.5s ease-in-out, padding 0.5s ease-in-out;
+        flex-shrink: 0;
+        overflow-x: hidden;
+    }
+
+    #sidebar-right.collapsed {
+        width: 0;
+        padding: 0;
+    }
+
+    .submenu {
+        display: none;
+        flex-direction: column;
+        gap: .5rem;
+        flex-grow: 1;
+        white-space: nowrap;
+    }
+
+    .submenu.active {
+        display: flex;
+    }
+
+    .submenu h3 {
+        margin: 0 0 1rem;
+        font-size: 1.1rem;
+        color: var(--navbar-light-primary);
+    }
+
+    .submenu a {
+        color: var(--navbar-light-secondary);
+        text-decoration: none;
+        font-size: .95rem;
+        padding: .6rem .8rem;
+        border-radius: 8px;
+        transition: background .2s, color .2s;
+    }
+
+    .submenu a:hover {
+        background: var(--navbar-light-primary);
+        color: var(--navbar-dark-primary);
+    }
+
+    /* ---------- MAIN CONTENT AREA ---------- */
+    .main-section {
+        flex-grow: 1;
+        color: #fff;
+        overflow-y: auto;
+        transition: margin-left .3s ease;
+    }
+</style>
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<div id="app-container">
+    <div id="sidebar-left">
+        <div id="toggle-btn" class="icon-btn"><i class="fas fa-chevron-left"></i></div>
+        <!-- Left sidebar buttons will be dynamically added here -->
+    </div>
+
+    <div id="sidebar-right">
+        <!-- Right submenu content will be dynamically added here -->
+    </div>
+
+</div>
+
+<script>
+    // A mapping from the icon names in the data to Font Awesome icon classes
+    const iconMap = {
+        "retail": "fa-shopping-bag",
+        "sort": "fa-sort",
+        "getting-started": "fa-home",
+        "accounting": "fa-calculator",
+        "buying": "fa-shopping-cart",
+        "sell": "fa-tags",
+        "stock": "fa-warehouse",
+        "assets": "fa-boxes",
+        "organization": "fa-industry",
+        "quality": "fa-award",
+        "project": "fa-tasks",
+        "support": "fa-life-ring",
+        "users": "fa-users",
+        "website": "fa-globe",
+        "crm": "fa-address-book",
+        "tool": "fa-toolbox",
+        "setting": "fa-cog",
+        "integration": "fa-link"
+    };
+
+    /**
+     * Renders the sidebar elements based on the provided page data.
+     * @param {Array} pages The array of page objects to render.
+     */
+    function renderSidebars(pages) {
+        const sidebarLeft = document.getElementById("sidebar-left");
+        const sidebarRight = document.getElementById("sidebar-right");
+        
+        // Clear existing content
+        while (sidebarLeft.children.length > 1) {
+            sidebarLeft.removeChild(sidebarLeft.lastChild);
+        }
+        sidebarRight.innerHTML = "";
+
+        const topLevelPages = pages.filter(page => page.parent_page === "");
+
+        let isFirst = true;
+        topLevelPages.forEach(page => {
+            const iconButton = document.createElement("div");
+            iconButton.className = "icon-btn";
+            if (isFirst) {
+                iconButton.classList.add("active");
+                isFirst = false;
+            }
+            iconButton.setAttribute("data-menu", page.name);
+
+            const iconElement = document.createElement("i");
+            const iconClass = iconMap[page.icon] || "fa-question-circle";
+            iconElement.className = `fas ${iconClass}`;
+            iconButton.appendChild(iconElement);
+
+            sidebarLeft.appendChild(iconButton);
+
+            const submenuDiv = document.createElement("div");
+            submenuDiv.id = `submenu-${page.name}`;
+            submenuDiv.className = "submenu";
+            if (iconButton.classList.contains("active")) {
+                submenuDiv.classList.add("active");
+            }
+            
+            const submenuTitle = document.createElement("h3");
+            submenuTitle.textContent = page.label;
+            submenuDiv.appendChild(submenuTitle);
+
+            // Parse content string and add links
+            try {
+                const contentData = JSON.parse(page.content);
+                contentData.forEach(item => {
+                    if (item.type === "shortcut" || item.type === "card") {
+                        const link = document.createElement("a");
+                        link.href = "#";
+                        link.textContent = item.data.shortcut_name || item.data.card_name;
+                        submenuDiv.appendChild(link);
+                    }
+                });
+            } catch (e) {
+                console.error("Failed to parse content for page: ", page.name, e);
+            }
+
+            sidebarRight.appendChild(submenuDiv);
+        });
+        
+        // Re-select elements after dynamic creation and add event listeners
+        const menuButtons = document.querySelectorAll("#sidebar-left .icon-btn[data-menu]");
+        const submenus = document.querySelectorAll(".submenu");
+        const toggleBtn = document.getElementById("toggle-btn");
+
+        toggleBtn.addEventListener("click", () => {
+            sidebarRight.classList.toggle("collapsed");
+            toggleBtn.classList.toggle("is-collapsed");
+        });
+
+        menuButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                menuButtons.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+
+                if (sidebarRight.classList.contains("collapsed")) {
+                    sidebarRight.classList.remove("collapsed");
+                    toggleBtn.classList.remove("is-collapsed");
+                }
+
+                submenus.forEach(menu => menu.classList.remove("active"));
+
+                const targetId = `submenu-${btn.dataset.menu}`;
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.classList.add("active");
+                }
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Mock frappe.call for demonstration purposes since the actual object is not available.
+        
+
+        try {
+            const response = await frappe.call({
+                method: "frappe.desk.desktop.get_workspace_sidebar_items",
+            });
+            if (response && response.message && response.message.pages) {
+                renderSidebars(response.message.pages);
+            } else {
+                console.error("Failed to fetch sidebar data: Invalid response structure.");
+            }
+        } catch (error) {
+            console.error("Error fetching sidebar data:", error);
+        }
+    });
+</script>

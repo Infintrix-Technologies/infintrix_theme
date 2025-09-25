@@ -12,6 +12,7 @@ import frappe
 import frappe.sessions
 from frappe import _
 from frappe.utils.jinja_globals import is_rtl
+from pprint import pprint
 
 SCRIPT_TAG_PATTERN = re.compile(r"\<script[^<]*\</script\>")
 CLOSING_SCRIPT_TAG_PATTERN = re.compile(r"</script\>")
@@ -39,8 +40,6 @@ def get_context(context):
 	theme_settings = frappe.db.sql(""" SELECT * FROM tabSingles WHERE doctype = 'Theme Settings'; """, as_dict=True)
 	for theme_setting in theme_settings:
 		theme_settings_list[theme_setting['field']] = theme_setting['value']
-
-	print("Theme",theme_settings_list)
 
 	boot_json = frappe.as_json(boot, indent=None, separators=(",", ":"))
 
@@ -84,9 +83,11 @@ def get_context(context):
 			),
 			"dark_theme": theme,
 			"theme_settings": theme_settings_list,
-			"disable_splash" : theme_settings_list['disable_splash'] if 'disable_splash' in theme_settings_list else 0,
-            "theme_color": (theme_settings_list['color'] or 'Blue').lower() if 'color' in theme_settings_list else 'blue',
+			"disable_splash" : bool(int(theme_settings_list.get('disable_splash', 0))),
+			"theme_color": (theme_settings_list['color'] or 'Blue').lower() if 'color' in theme_settings_list else 'blue',
 		}
 	)
+
+	# pprint(context)
 
 	return context

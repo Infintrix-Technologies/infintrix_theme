@@ -21,6 +21,10 @@
 			href="{{ favicon or "/assets/frappe/images/frappe-favicon.svg" }}" type="image/x-icon">
 		<link rel="icon"
 			href="{{ favicon or "/assets/frappe/images/frappe-favicon.svg" }}" type="image/x-icon">
+			<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  rel="stylesheet"
+/>
 
 
 				<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family={{theme_settings.font_family or 'Cairo'}}:300,400,500,600,700,800,900">
@@ -106,20 +110,20 @@
 		
 
 		
-		<div id="app-root" style="display: flex; height: 100vh;">
+		<div id="app-root">
 			
 			<!-- Sidebar Mount Point -->
 			<!-- <div id="sidebar" style="width: 250px; background:#1a1a40; color:#fff;"></div> -->
 			<!-- <div id="infintrixerp-menu"></div> -->
 			<!-- Main Section -->
-			<div class="main-section" style="flex:1;">
+			<div class="main-section">
 				<header></header>
-					<div id="top_menu" class="container" ></div>
-				<div id="body">
+				<div id="main-section-body" style="display: flex; flex-direction: row;">
 					
+						{% include "infintrix_theme/templates/includes/sidebar_2.html" %}
+					<div id="body" style="flex: 1;"></div>
 				</div>
 				<footer></footer>
-
 			</div>
 		</div>
 		<div id="all-symbols" style="display:none"></div>

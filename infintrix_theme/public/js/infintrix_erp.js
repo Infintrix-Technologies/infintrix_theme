@@ -90,7 +90,6 @@ $(document).ready(() => {
 
 				themeToggleButton.addEventListener("click", () => {
 					const currentTheme = getCurrentTheme();
-					console.log("Current theme:", currentTheme);
 					const theme_to_switch = currentTheme === "light" ? "Dark" : "Light";
 					frappe.call({
 						method: "frappe.core.doctype.user.user.switch_theme",

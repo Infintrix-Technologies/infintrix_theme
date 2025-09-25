@@ -13,6 +13,10 @@ body {
     background-color: color-mix(in srgb, var(--primary)5%, var(--bg-color) 95%) !important;
 }
 
+* {
+    color: var(--text-color);
+}
+
 a[href*="support"] {
     display: none;
 }
@@ -391,6 +395,7 @@ body.full-width .container {
 
 ul#awesomplete_list_1 {
     z-index: 9999999999999;
+    border : 0.2px solid var(--primary)
 }
 
 /* Page blur effect when search is active */

@@ -132,6 +132,20 @@ frappe.router.on("change", async () => {
 });
 
 window.onload = async () => {
+
+  // $('.page-title .sidebar-toggle-btn').off('click');
+
+  //   // Add your custom behavior
+  //   $('.page-title .sidebar-toggle-btn').on('click', function (e) {
+  //       e.preventDefault(); // stop any default link behavior if present
+  //       console.log("Custom sidebar toggle clicked!");
+
+  //       // Example: custom toggle logic
+  //       $('#my-sidebar').toggleClass('open');
+  //   });
+
+
+
 	const response = await frappe.call({
 		method: "frappe.desk.desktop.get_workspace_sidebar_items",
 	});

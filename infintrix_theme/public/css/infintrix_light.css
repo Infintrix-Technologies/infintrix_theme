@@ -24,12 +24,14 @@
     --btn-primary: var(--fluent-primary);
     --text-color: var(--fluent-text-primary);
     --text-muted: var(--fluent-text-secondary);
+    --text-primary: var(--fluent-text-primary);
+    --text-secondary: var(--fluent-text-secondary);
     --heading-color: var(--fluent-text-primary);
     --border-color: var(--fluent-divider);
     --table-border-color: var(--fluent-divider);
     --control-bg: var(--fluent-surface);
     --input-disabled-bg: #FAFAFA;
-    --highlight-color: rgba(0, 120, 212, 0.1);
+    --highlight-color: color-mix(in srgb, var(--fluent-primary) 20%, var(--fluent-surface) 80%);
     --card-shadow: var(--fluent-shadow-md);
     --modal-shadow: var(--fluent-shadow-lg);
     --btn-shadow: none;
