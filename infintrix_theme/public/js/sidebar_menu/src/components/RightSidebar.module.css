@@ -1,0 +1,124 @@
+/*
+ * This file has been updated to use the custom CSS properties from your theme.
+ * All 'mantine' variables and 'light-dark()' functions have been replaced
+ * with their equivalent fluent design variables.
+ */
+
+.navbar {
+  background-color: var(--bg-color);
+  /* width: 350px; */
+  flex-direction: column;
+  /* Using the fluent design's divider for the border */
+  border-right: 1px solid var(--fluent-divider);
+}
+
+.wrapper {
+  display: flex;
+  flex: 1;
+}
+
+.aside {
+  flex: 0 0 60px;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Using the fluent design's divider for the border */
+  border-right: 1px solid var(--fluent-divider);
+}
+
+.main {
+  flex: 1;
+  background-color: var(--bg-color);
+}
+
+.mainLink {
+  width: 44px;
+  height: 44px;
+  /* Replaced mantine radius with a fixed value */
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Using the muted text color for a subtle look */
+  color: var(--text-muted);
+
+  &:hover {
+    /* Using the primary brand color for the hover state */
+    background-color: var(--primary);
+    color: var(--text-color);
+  }
+
+  &[data-active] {
+    &,
+    &:hover {
+      /* Using the primary brand color and primary text color for active state */
+      background-color: var(--primary);
+      color: var(--text-color);
+    }
+  }
+}
+
+.title {
+  /* Using the theme's font stack */
+  font-family: var(--font-stack);
+  /* Replaced mantine spacing with a fixed value */
+  margin-bottom: 1rem;
+  /* Using the theme's background color */
+  background-color: var(--bg-color);
+  /* Replaced mantine spacing with a fixed value */
+  padding: 0.5rem;
+  font-weight: 500;
+  padding-top: 18px;
+  height: 60px;
+  /* Using the fluent design's divider for the border */
+  border-bottom: 1px solid var(--fluent-divider);
+}
+
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  /* Replaced mantine spacing with a fixed value */
+  padding-top: 0.5rem;
+  /* Using the fluent design's divider for the border */
+  border-bottom: 1px solid var(--fluent-divider);
+  /* Replaced mantine spacing with a fixed value */
+  margin-bottom: 1rem;
+}
+
+.link {
+  display: block;
+  text-decoration: none;
+  /* Replaced mantine radius with a fixed value */
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  color: var(--text-color);
+  /* Replaced mantine spacing with a fixed value */
+  padding: 0 0.5rem;
+  /* Using the theme's base font size */
+  font-size: var(--text-base);
+  /* Replaced mantine spacing with a fixed value */
+  margin-right: 0.5rem;
+  font-weight: 500;
+  height: 44px;
+  line-height: 44px;
+
+  &:hover {
+    /* Using a darker shade of the brand color for a clear hover background */
+    background-color: var(--brand-color-600);
+    /* Ensuring text is visible with the primary text color */
+    color: var(--fluent-text-primary);
+  }
+
+  &[data-active] {
+    &,
+    &:hover {
+      /* Using the primary brand color for the active state */
+      border-left-color: var(--primary);
+      background-color: var(--primary);
+      color: var(--text-color);
+    }
+  }
+}

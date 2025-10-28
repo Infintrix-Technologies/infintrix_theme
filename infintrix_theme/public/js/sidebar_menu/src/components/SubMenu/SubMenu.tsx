@@ -10,7 +10,7 @@ export function SubMenu({ data }: { data: ISecondSidebar | undefined | null }) {
   return (
 
 
-    <Tabs variant="pills" defaultValue={'menu'}>
+    <Tabs variant="default" defaultValue={'menu'}>
       <Tabs.List>
         <Tabs.Tab value="menu">
           Menu
