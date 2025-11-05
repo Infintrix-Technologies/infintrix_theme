@@ -107,7 +107,7 @@
 
   &:hover {
     /* Using a darker shade of the brand color for a clear hover background */
-    background-color: var(--brand-color-600);
+    background-color: var(--primary);
     /* Ensuring text is visible with the primary text color */
     color: var(--fluent-text-primary);
   }

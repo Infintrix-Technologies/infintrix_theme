@@ -79,6 +79,7 @@ export interface IPage {
   parenttype: string;
   doctype: string;
   parent_page: string; // Added this property based on usage
+  subpages? : ISecondSidebar; // Added this property based on usage
 }
 
 export interface ISecondSidebar {

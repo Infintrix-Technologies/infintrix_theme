@@ -13,11 +13,15 @@ import { MantineProvider } from '@mantine/core';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Sidebar } from './components/Sidebar.tsx'
 // import { RightSidebar } from './components/RightSidebar.tsx'
+// import { createTheme } from '@mantine/core';
 
+// const theme = createTheme({
+//   // primaryColor: 'var(--primary)',
+// });
 createRoot(document.getElementById('infintrix_sidebar_menu')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient1}>
-      <MantineProvider>
+      <MantineProvider >
         <Sidebar />
       </MantineProvider>
       <ReactQueryDevtools initialIsOpen={false} />
