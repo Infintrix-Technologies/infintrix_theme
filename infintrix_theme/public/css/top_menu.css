@@ -1,13 +1,11 @@
 /*
  * Infintrix Custom UI Components
- * Description: Refactored styles for a workspace dropdown and a navigation bar.
- * This file is structured to support both light and dark modes by separating
- * theme-agnostic (layout, structure) styles from theme-dependent (color, shadow) styles.
+ * Description: Refactored styles for a workspace drawer (from left) and a navigation bar.
 */
 
 /* --- 1. THEME-AGNOSTIC STYLES (APPLY TO ALL THEMES) --- */
 
-/* --- Workspace Dropdown: Structure & Layout --- */
+/* --- Workspace Drawer: Structure & Layout --- */
 .infintrix-workspace-dropdown-container {
     position: relative;
     display: inline-block;
@@ -25,17 +23,26 @@
 
 .infintrix-dropdown-menu {
     position: fixed;
-    left: 0;
+    top: 0;
+    right: auto; /* Changed: Reset right alignment */
+    left: 0; /* Modified: Align to the left */
     display: none;
-    justify-content: center;
-    align-items: stretch;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: flex-start;
+    align-items: flex-start;
     padding: 20px;
     box-sizing: border-box;
     z-index: 99999999;
-    width: 50vw;
-    height: 80vh;
-    
-  
+    /* Responsive width: Min 280px, Max 400px, or 80% of viewport width */
+    width: clamp(280px, 80vw, 400px);
+    height: 100vh; /* Full viewport height */
+    transition: transform 0.4s ease-out; /* Transition for sliding */
+    transform: translateX(-100%); /* Modified: Start hidden off-screen to the left */
+}
+
+/* State when the drawer is open */
+.infintrix-dropdown-menu.open {
+    transform: translateX(0); /* Slide into view */
 }
 
 .infintrix-dropdown-menu ul {
@@ -43,37 +50,39 @@
     padding: 0;
     margin: 0;
     width: 100%;
-    max-height: 100vh;
+    max-height: calc(100vh - 40px); /* Account for padding */
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 15px; /* Increased gap for better spacing */
 }
 
 .infintrix-dropdown-item {
     cursor: pointer;
-    transition: transform 0.6s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     border-radius: 8px;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column; /* Stack icon and text vertically */
+    align-items: flex-start; /* Align content to the left (drawer style) */
     justify-content: center;
-    text-align: center;
+    text-align: left;
     font-size: 1.2rem;
     font-weight: 500;
-    flex: 1 1 calc(50% - 25%);
+    flex: 1 1 100%; /* Make each item take full drawer width */
     box-sizing: border-box;
+    padding: 15px;
+    min-height: 80px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    /* background-color: color-mix(in srgb, var(--primary) 50%, var(--bg-color) 50%); */
 }
 
 .infintrix-dropdown-item:hover {
-    transform: translateY(-5px);
-    background-color: color-mix(in srgb, var(--primary) 50%, var(--bg-color) 50%) !important;
+    transform: translateY(-2px); /* Slightly reduced lift for drawer item */
+    background-color: color-mix(in srgb, var(--primary) 10%, var(--bg-color) 90%) !important;
 }
 
 .infintrix-dropdown-item-icon {
     margin-right: 0;
+    margin-bottom: 8px; /* Space between icon and text */
 }
 
 .infintrix-dropdown-item-icon svg.icon {
@@ -81,7 +90,7 @@
     height: 32px;
 }
 
-/* --- Fluent Navbar: Structure & Layout --- */
+/* --- Fluent Navbar: Structure & Layout (Unchanged) --- */
 .infintrix-navbar {
     backdrop-filter: blur(10px) saturate(180%);
     width: 100%;
@@ -164,7 +173,7 @@
 /* --- 2. THEME-DEPENDENT STYLES (LIGHT MODE) --- */
 [data-theme='light'] {
 
-    /* --- Workspace Dropdown: Colors --- */
+    /* --- Workspace Drawer: Colors --- */
     .infintrix-dropdown-button {
         background-color: rgba(0, 0, 0, 0.07);
         color: #555;
@@ -175,7 +184,8 @@
     }
 
     .infintrix-dropdown-menu {
-        background-color: color-mix(in srgb, var(--primary, #0078D4) 10%, #f5f5f5);
+        background-color: var(--popover-bg, #FFFFFF); /* Clean drawer background */
+        box-shadow: 6px 0 15px rgba(0,0,0,0.1); /* Modified: Shadow on the right edge */
     }
 
     .infintrix-dropdown-item {
@@ -201,7 +211,6 @@
 
     .infintrix-navbar-link:hover,
     .infintrix-navbar-link:focus {
-        /* background-color: var(--highlight-color, rgba(0, 120, 212, 0.1)); */
         color: var(--text-dark);
         background-color: var(--fluent-primary);
         text-decoration: none !important;
@@ -221,7 +230,7 @@
 
 [data-theme='dark'] {
 
-    /* --- Workspace Dropdown: Colors --- */
+    /* --- Workspace Drawer: Colors --- */
     .infintrix-dropdown-button {
         background-color: rgba(255, 255, 255, 0.1);
         color: #ccc;
@@ -232,7 +241,8 @@
     }
 
     .infintrix-dropdown-menu {
-        background-color: color-mix(in srgb, var(--primary, #0078D4) 10%, #333);
+        background-color: var(--bg-dark-2, #252627); /* Darker drawer background */
+        box-shadow: 6px 0 15px rgba(0, 0, 0, 0.5); /* Modified: Shadow on the right edge */
     }
 
     .infintrix-dropdown-item {
@@ -249,7 +259,7 @@
         background-color: color-mix(in srgb, var(--primary, #0078D4) 50%, var(--navbar-bg, rgba(0, 0, 0, 0.8)) 50%);
         border-bottom: 1px solid var(--border-color, #444);
          border-radius: 50px !important;
-       
+
     }
 
     .infintrix-navbar-link {
@@ -272,7 +282,6 @@
         border: 1px solid var(--border-color, #444);
     }
 }
-
 
 
  .sticky-top {

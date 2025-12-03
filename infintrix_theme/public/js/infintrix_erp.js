@@ -1,5 +1,3 @@
-
-
 $(document).ready(() => {
 	function addFullscreenToggleButton() {
 		const maximize_icon_svg =
@@ -118,10 +116,10 @@ $(document).ready(() => {
 	}
 
 	function addLanguageSwitchButton() {
-
 		const currentTheme = getCurrentTheme();
 
-		const icon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>'
+		const icon =
+			'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>';
 
 		const languageSwitchButton = document.createElement("li");
 		languageSwitchButton.id = "languageSwitchButton";
@@ -147,12 +145,15 @@ $(document).ready(() => {
 						method: "frappe.client.get_list",
 						args: {
 							doctype: "Language",
-							fields: ["language_name"],
+							fields: ["language_name","language_code"],
 							limit_page_length: 0,
 						},
 						callback: function (response) {
 							if (response.message) {
-								const languages = response.message.map(lang => lang.language_name);
+								const languages = response.message
+								.map(lang => `${lang.language_name} - ${lang.language_code}`)
+								.join('\n');
+											
 
 								frappe.prompt(
 									[
@@ -165,18 +166,25 @@ $(document).ready(() => {
 										},
 									],
 									(values) => {
-										const selectedLanguage = values.language;
+										const selectedLanguage = values.language.split(' - ')[1];
+										
 										console.log("Selected Language:", selectedLanguage);
-
 										frappe.call({
-											method: "frappe.core.doctype.user.user.set_language",
-											args: { language: selectedLanguage },
+											method: "frappe.client.set_value",
+											args: {
+												doctype: "User",
+												name: frappe.session.user,
+												fieldname: "language",
+												value: selectedLanguage,
+											},
 											callback: function () {
-												frappe.msgprint(__("Language switched to " + selectedLanguage));
-												location.reload(); // Reload the page to apply the language change
+												frappe.msgprint(
+													__("Language switched to " + values.language.split(' - ')[0] + ". Reloading...")
+												);
+												location.reload();
 											},
 											error: function () {
-												frappe.msgprint(__("Failed to switch language. Please ensure the method exists."));
+												frappe.msgprint(__("Failed to update language."));
 											},
 										});
 									},
@@ -223,62 +231,72 @@ $(document).ready(() => {
 
 	addFullscreenToggleButton();
 	addThemeToggleButton();
-	addLanguageSwitchButton()
+	addLanguageSwitchButton();
 });
 
 (function () {
-  // Helper to open new doc (prefer frappe.new_doc)
-  function openNewDoc(doctype) {
-    try {
-      if (window.frappe && typeof window.frappe.new_doc === "function") {
-        window.frappe.new_doc(doctype);
-        return;
-      }
-    } catch (err) {
-      console.warn("frappe.new_doc failed:", err);
-    }
-    // fallback to Desk route
-    window.open("/app/" + encodeURIComponent(doctype) + "/new", "_blank");
-  }
+	// Helper to open new doc
+	function openNewDoc(doctype) {
+		try {
+			if (window.frappe && typeof window.frappe.new_doc === "function") {
+				window.frappe.new_doc(doctype);
+				return;
+			}
+		} catch (err) {
+			console.warn("frappe.new_doc failed:", err);
+		}
+		window.open("/app/" + encodeURIComponent(doctype) + "/new", "_blank");
+	}
 
-  function addButton(input) {
-    if (input.dataset._btnAdded === "1") return;
+	function addButton(clearfix) {
+		if (clearfix.dataset._btnAdded === "1") return;
 
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.textContent = "+";
-    btn.className = "link-add-btn btn-primary";
-    btn.style.padding = "4px 10px";
-    btn.style.border = "1px solid #ccc";
-    btn.style.borderRadius = "4px";
-    btn.style.background = "#f8f9fa";
-    btn.style.cursor = "pointer";
-    btn.style.marginLeft = "4px";
+		const wrapper = clearfix.closest('[data-fieldtype="Link"]');
+		if (!wrapper) return;
 
-    btn.addEventListener("click", () => {
-      const target = input.dataset.target || input.dataset.doctype || "record";
-      openNewDoc(target);
-    });
+		const input = wrapper.querySelector('input[data-fieldtype="Link"]');
+		if (!input) return;
 
-    input.insertAdjacentElement("afterend", btn);
-    input.dataset._btnAdded = "1";
-  }
+		const btn = document.createElement("span");
+		// btn.type = "span";
+		btn.textContent = "+";
+		btn.className = "link-add-btn quick-create-btn";
+		btn.style.padding = "1px 2px";
+		// btn.style.marginLeft = "2px";
+		// btn.style.border = "0.5px solid #ccc";
+		// btn.style.borderRadius = "2px";
+		// btn.style.background = "#f8f9fa";
+		btn.style.cursor = "pointer";
 
-  function processAll() {
-    document.querySelectorAll('input[data-fieldtype="Link"]').forEach(addButton);
-  }
+		btn.addEventListener("click", () => {
+			const target = input.dataset.target || input.dataset.doctype || "record";
+			openNewDoc(target);
+		});
 
-  // Initial run once DOM is ready
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", processAll);
-  } else {
-    processAll();
-  }
+		// Insert inside .clearfix
+		clearfix.appendChild(btn);
 
-  // Watch for dynamically inserted fields
-  const mo = new MutationObserver(() => processAll());
-  mo.observe(document.body, { childList: true, subtree: true });
+		clearfix.dataset._btnAdded = "1";
+	}
+
+	function processAll() {
+		document
+			.querySelectorAll('div[data-fieldtype="Link"] > .form-group > .clearfix')
+			.forEach(addButton);
+	}
+
+	// Initial run
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", processAll);
+	} else {
+		processAll();
+	}
+
+	// Watch for dynamic fields
+	const mo = new MutationObserver(processAll);
+	mo.observe(document.body, { childList: true, subtree: true });
 })();
+
 
 // (function () {
 //   function addButton(input) {
