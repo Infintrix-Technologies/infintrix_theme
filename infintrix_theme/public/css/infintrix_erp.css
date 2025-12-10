@@ -58,7 +58,7 @@ body.full-width .container {
 .like-disabled-input {
     border-radius: 4px !important;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    height: 32px !important;
+    /* height: 32px !important; */
     padding: 6px 10px !important;
 }
 
@@ -395,7 +395,7 @@ body.full-width .container {
 
 ul#awesomplete_list_1 {
     z-index: 9999999999999;
-    border : 0.2px solid var(--primary)
+    border: 0.2px solid var(--primary)
 }
 
 /* Page blur effect when search is active */
@@ -410,7 +410,7 @@ ul#awesomplete_list_1 {
 }
 
 .page-container {
-    background-color: color-mix(in srgb, var(--primary) 10%, var(--bg-color) 100%)
+    background-color: color-mix(in srgb, var(--primary) 5%, var(--bg-color) 95%)
 }
 
 svg.feather {
@@ -421,20 +421,14 @@ svg.feather {
 
 
 
-input[type=checkbox]:checked {
-    background-color: var(--primary);
-    background-image: url("data:image/svg+xml, <svg viewBox='0 0 8 7' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1 4.00001L2.66667 5.80001L7 1.20001' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-    background-size: 57%, 100%;
-    box-shadow: none;
-    border: none;
-}
+
 
 
 /* .frappe-control .link-btn {
     background-color: transparent !important;
     display: inline !important;
     position: absolute; */
-    /* right: 2.5rem; */
+/* right: 2.5rem; */
 /* } */
 /* .layout-main-section .awesomplete {
     display: flex;
@@ -447,5 +441,24 @@ input[type=checkbox]:checked {
 span.link-add-btn.quick-create-btn {
     background: var(--brand-color-400);
     padding: 1px 5px !important;
-    color : var(--text-color);
+    color: var(--text-color);
+}
+
+.page-head.flex {
+    background-color: color-mix(in srgb, var(--fluent-primary) 10%, var(--fluent-surface) 90%) !important;
+}
+
+mark {
+    background-color: var(--fluent-primary) !important;
+    color: white;
+}
+
+button.btn-primary * {
+    color: var(--fluent-surface);
+}
+button.btn {
+    border: 0.7px solid var(--primary);
+}
+input[data-fieldtype="Table MultiSelect"] {
+    border: none !important;
 }

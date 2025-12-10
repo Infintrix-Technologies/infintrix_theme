@@ -52,6 +52,7 @@
         border-bottom: 1px solid var(--border-color) !important;
     }
 
+
     .layout-main-section {
         border: 1px solid var(--border-color) !important;
         box-shadow: var(--card-shadow) !important;
@@ -67,16 +68,16 @@
     .form-control,
     .awesomplete>input,
     .like-disabled-input {
-        background-color: var(--control-bg) !important;
-        border: 1px solid var(--fluent-divider) !important;
+        background-color: color-mix(in srgb, var(--control-bg) 95%, var(--primary) 5%);
+        border: 0.5px solid var(--primary);
         color: var(--text-primary) !important;
         box-shadow: var(--fluent-shadow-sm) !important;
     }
 
     .form-control:focus,
     .awesomplete>input:focus {
-        border-color: var(--fluent-primary) !important;
-        box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.3) !important;
+        /* border-color: var(--fluent-primary) !important; */
+        /* box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.3) !important; */
     }
 
     .like-disabled-input {
@@ -312,5 +313,13 @@
         background-color: color-mix(in srgb, var(--primary) 50%, var(--fg-color) 100%);
     }
 
-    
+    input[type=checkbox]:checked {
+        background-color: var(--primary);
+        background-image: url("data:image/svg+xml, <svg viewBox='0 0 8 7' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1 4.00001L2.66667 5.80001L7 1.20001' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+        background-size: 57%, 100%;
+        box-shadow: none;
+        border: none;
+    }
+
+
 }

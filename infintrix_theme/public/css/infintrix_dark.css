@@ -57,7 +57,7 @@
     .layout-main-section {
         border: 1px solid var(--border-color) !important;
         box-shadow: var(--card-shadow) !important;
-                /* background-color: color-mix(in srgb, var(--primary) 10%, var(--fg-color) 100%); */
+        /* background-color: color-mix(in srgb, var(--primary) 10%, var(--fg-color) 100%); */
 
     }
 
@@ -69,16 +69,16 @@
     .form-control,
     .awesomplete>input,
     .like-disabled-input {
-        background-color: var(--control-bg) !important;
-        border: 1px solid var(--fluent-divider) !important;
+        background-color: color-mix(in srgb, var(--control-bg) 98%, var(--primary) 2%);
+        border: 0.5px solid var(--primary);
         color: var(--text-primary) !important;
         box-shadow: var(--fluent-shadow-sm) !important;
     }
 
     .form-control:focus,
     .awesomplete>input:focus {
-        border-color: var(--fluent-primary) !important;
-        box-shadow: 0 0 0 2px rgba(58, 150, 221, 0.3) !important;
+        /* border-color: var(--fluent-primary) !important; */
+        /* box-shadow: 0 0 0 2px rgba(58, 150, 221, 0.3) !important; */
     }
 
     .like-disabled-input {
@@ -165,102 +165,102 @@
         border-radius: 15px;
         padding: 14px;
     }
-   
-    
+
+
     .widget.shortcut-widget-box:hover {
         border-color: var(--fluent-primary);
         box-shadow: var(--fluent-shadow-md);
     }
-    
+
     .widget.menu-widget {
         background-color: #2A2A2A;
     }
-    
+
     .menu-widget:hover .widget-title .widget-title-text {
         color: var(--gray-100);
     }
-    
+
     /* --- Modals --- */
     .modal-backdrop {
         background: rgba(30, 30, 30, 0.6) !important;
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
     }
-    
+
     .modal-content {
         border: 1px solid var(--fluent-divider) !important;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), var(--modal-shadow) !important;
         background: var(--fluent-surface-transparent);
     }
-    
+
     .modal-header {
         background-color: var(--fluent-surface) !important;
         border-bottom: 1px solid var(--fluent-divider) !important;
     }
-    
+
     .modal-footer {
         background-color: var(--fluent-background) !important;
         border-top: 1px solid var(--fluent-divider) !important;
     }
-    
+
     /* --- Tree View --- */
     .tree-label {
         color: var(--text-primary) !important;
     }
-    
+
     .tree-link .icon,
     .tree-link .es-icon {
         color: var(--text-secondary);
         --icon-stroke: var(--text-secondary);
     }
-    
+
     .tree-children::before {
         background-color: var(--fluent-divider);
     }
-    
+
     .tree-node::before {
         background-color: var(--fluent-divider);
     }
-    
+
     .balance-area {
         color: var(--text-secondary);
     }
-    
+
     .tree-node-row:hover .tree-link {
         background-color: var(--highlight-color);
     }
-    
+
     .tree-link.selected {
         background-color: var(--highlight-color);
     }
-    
+
     .tree-link.selected::before {
         background-color: var(--fluent-primary);
     }
-    
+
     .tree-link.selected .tree-label {
         color: var(--fluent-primary) !important;
     }
-    
+
     .tree-link.selected .icon,
     .tree-link.selected .node-parent {
         color: var(--fluent-primary);
         --icon-stroke: var(--fluent-primary);
     }
-    
+
     /* --- Navbar & Search --- */
     .navbar {
         border-bottom: 1px solid var(--border-color) !important;
     }
-    
+
     #navbar-breadcrumbs li a {
         color: var(--text-secondary);
     }
-    
+
     #navbar-breadcrumbs li.disabled a {
         color: var(--text-primary) !important;
     }
-    
+
     #navbar-breadcrumbs li:not(:first-child)::before {
         content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="none" stroke="%23D4D4D4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m6 4 4 4-4 4"/></svg>');
         display: inline-block;
@@ -268,49 +268,66 @@
         margin: 0 4px;
         opacity: 0.8;
     }
-    
+
     .search-bar input#navbar-search {
         border: 1px solid var(--fluent-divider) !important;
         background-color: var(--fluent-background) !important;
     }
-    
+
     .search-bar input#navbar-search:focus {
         background-color: var(--fluent-surface) !important;
         border-color: var(--fluent-primary) !important;
         box-shadow: 0 0 0 3px rgba(58, 150, 221, 0.2) !important;
     }
-    
+
     .search-bar .awesomplete>ul {
         box-shadow: var(--fluent-shadow-lg);
         border: 1px solid var(--fluent-divider);
     }
-    
+
     .search-bar .awesomplete>ul>li:hover,
     .search-bar .awesomplete>ul>li[aria-selected="true"] {
         background-color: var(--highlight-color);
     }
-    
+
     .search-bar .awesomplete>ul>li a {
         color: var(--text-color);
     }
-    
+
     .search-bar .awesomplete>ul>li a b {
         color: var(--fluent-primary);
     }
-    
+
     .navbar-nav .nav-item .btn-reset:hover {
         background-color: var(--highlight-color);
     }
-    
+
     .dropdown-menu {
         box-shadow: var(--fluent-shadow-lg);
         border: 1px solid var(--border-color);
     }
-    
+
     .navbar .vertical-bar {
         background-color: var(--fluent-divider);
     }
+
     .list-row-head {
         background-color: color-mix(in srgb, var(--primary) 50%, var(--fg-color) 100%);
     }
+
+    /* mark {
+      color: var(--fluent-on-primary) !important;
+    } */
+    button.btn-primary * {
+        color: var(--fluent-text-primary);
+    }
+
+    input[type=checkbox]:checked {
+        background-color: var(--primary);
+        background-image: url("data:image/svg+xml, <svg viewBox='0 0 8 7' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1 4.00001L2.66667 5.80001L7 1.20001' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+        background-size: 57%, 100%;
+        box-shadow: none;
+        border: none;
+    }
+
 }
