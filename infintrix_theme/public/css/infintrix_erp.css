@@ -59,7 +59,7 @@ body.full-width .container {
     border-radius: 4px !important;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     /* height: 32px !important; */
-    padding: 6px 10px !important;
+    /* padding: 6px 10px !important; */
 }
 
 /* --- Buttons --- */
