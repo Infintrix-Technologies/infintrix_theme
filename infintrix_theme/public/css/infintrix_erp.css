@@ -462,3 +462,72 @@ button.btn {
 input[data-fieldtype="Table MultiSelect"] {
     border: none !important;
 }
+
+.new-timeline .timeline-dot {
+    /* width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    font-size: var(--text-xs);
+    position: absolute;
+    --zero-px: 0px;
+    top: clamp(var(--zero-px), 50% - 16px / 2, max(var(--zero-px), (34px - (50% - 16px / 2)) * 34));
+    left: -8px;
+    background-color: var(--timeline-badge-bg);
+    --icon-stroke: var(--timeline-badge-color);
+    left: calc(-1.25 * var(--timeline-item-left-margin) / 2);
+    background: var(--bg-color); */
+    border: 1px solid var(--primary) !important;
+
+}
+
+.new-timeline:before {
+    /* content: " ";
+    top: 90px;
+    left: calc(var(--timeline-item-icon-size) / 2);
+    position: absolute; */
+    border-left: 1px solid var(--primary) !important;
+    /* bottom: calc(-1 * var(--timeline-item-bottom-margin) + 25px); */
+}
+
+.new-timeline .timeline-item .timeline-badge {
+    /* width: var(--timeline-item-icon-size);
+    height: var(--timeline-item-icon-size);
+    border-radius: 50%;
+    font-size: var(--text-xs);
+    position: absolute;
+    --zero-px: 0px;
+    top: clamp(var(--zero-px), 50% - var(--timeline-item-icon-size) / 2, max(var(--zero-px), (34px - (50% - var(--timeline-item-icon-size) / 2)) * 34));
+    left: calc(-1 * var(--timeline-item-icon-size) / 2);
+    background-color: var(--timeline-badge-bg); */
+    /* --icon-stroke: color-mix(in srgb, var(--primary) 70%, var(--fg-color) 30%); */
+    /* left: calc(-1 * var(--timeline-item-left-margin)); */
+    border: 1px solid var(--primary) !important;
+}
+
+input:checked + .slider {
+    background-color: var(--primary) !important;
+}
+button.btn.btn-secondary.action-btn {
+    border: 0.5px solid var(--primary) !important;
+}
+.new-timeline .activity-title h4, .new-timeline .timeline-actions h4 {
+    /* flex: auto;
+    margin-bottom: 0;
+    font-weight: 700; */
+    padding-left: 14px !important;
+}
+
+.new-timeline .activity-title, .new-timeline .timeline-actions {
+    /* margin-bottom: 0 !important;
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+    /* margin-left: 0px !important; */
+    background-color: color-mix(in srgb, var(--primary) 10%, var(--bg-color) 90%) !important;
+    /* padding-left: 0px; */
+    border-radius: 30px !important;
+}
+
+.section-head {
+    padding-left: 1rem !important;
+}
