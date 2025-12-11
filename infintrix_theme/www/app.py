@@ -36,13 +36,32 @@ def get_context(context):
 	csrf_token = frappe.sessions.get_csrf_token()
 
 	frappe.db.commit()
+
+
+	desk_theme = frappe.db.get_value("User", frappe.session.user, "desk_theme")
+
+
 	theme_settings_list = {}
 	theme_settings = frappe.db.sql(""" SELECT * FROM tabSingles WHERE doctype = 'Theme Settings'; """, as_dict=True)
 	for theme_setting in theme_settings:
 		theme_settings_list[theme_setting['field']] = theme_setting['value']
 
-	boot_json = frappe.as_json(boot, indent=None, separators=(",", ":"))
+	light_logo = theme_settings_list.get('light_logo')
+	dark_logo = theme_settings_list.get('dark_logo')
+	default_light_logo = boot.app_logo_url or "/assets/frappe/images/frappe-logo.png"
+	
+	if desk_theme == 'Dark' and dark_logo:
+		boot.app_logo_url = dark_logo
+	elif light_logo:
+		boot.app_logo_url = light_logo
+	else:
+		boot.app_logo_url = default_light_logo
 
+	boot.light_logo = light_logo or default_light_logo
+	boot.dark_logo = dark_logo or default_light_logo
+
+
+	boot_json = frappe.as_json(boot, indent=None, separators=(",", ":"))
 	# remove script tags from boot
 	boot_json = SCRIPT_TAG_PATTERN.sub("", boot_json)
 
@@ -58,7 +77,6 @@ def get_context(context):
 		include_js.append("sentry.bundle.js")
 
 
-	desk_theme = frappe.db.get_value("User", frappe.session.user, "desk_theme")
 	theme = 'light'
 	if (desk_theme == 'Dark'):
 		theme = 'dark'

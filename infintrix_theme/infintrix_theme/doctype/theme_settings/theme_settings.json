@@ -9,6 +9,8 @@
   "color",
   "font_size",
   "disable_splash",
+  "light_logo",
+  "dark_logo",
   "column_break_pfzv",
   "font_preview"
  ],
@@ -53,13 +55,23 @@
    "fieldname": "disable_splash",
    "fieldtype": "Check",
    "label": "Disable Splash"
+  },
+  {
+   "fieldname": "light_logo",
+   "fieldtype": "Attach",
+   "label": "LIght Logo"
+  },
+  {
+   "fieldname": "dark_logo",
+   "fieldtype": "Attach",
+   "label": "Dark Logo"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-12-04 00:58:34.589823",
+ "modified": "2025-12-12 01:51:47.227079",
  "modified_by": "Administrator",
  "module": "Infintrix Theme",
  "name": "Theme Settings",

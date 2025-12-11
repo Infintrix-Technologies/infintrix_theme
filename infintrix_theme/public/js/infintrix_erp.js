@@ -89,6 +89,7 @@ $(document).ready(() => {
 				themeToggleButton.addEventListener("click", () => {
 					const currentTheme = getCurrentTheme();
 					const theme_to_switch = currentTheme === "light" ? "Dark" : "Light";
+
 					frappe.call({
 						method: "frappe.core.doctype.user.user.switch_theme",
 						args: { theme: theme_to_switch },
@@ -99,12 +100,20 @@ $(document).ready(() => {
 							);
 							themeToggleButton.innerHTML =
 								theme_to_switch === "Light" ? moon_icon_svg : sun_icon_svg;
+
+							if (theme_to_switch == "Light") {
+								console.log("Current theme:", currentTheme);
+								document.querySelector(".app-logo").src = frappe.boot.light_logo;
+							} else {
+								document.querySelector(".app-logo").src = frappe.boot.dark_logo;
+							}
 						},
 						error: function (error) {
 							console.error("Error switching theme:", error);
 							frappe.msgprint(__("Failed to switch theme."));
 						},
 					});
+					// document.querySelector(".app-logo").src = frappe.boot.app_logo_url
 				});
 			} else {
 				// Retry after a short delay if #fullscreenToggleButton is not available yet
@@ -145,15 +154,14 @@ $(document).ready(() => {
 						method: "frappe.client.get_list",
 						args: {
 							doctype: "Language",
-							fields: ["language_name","language_code"],
+							fields: ["language_name", "language_code"],
 							limit_page_length: 0,
 						},
 						callback: function (response) {
 							if (response.message) {
 								const languages = response.message
-								.map(lang => `${lang.language_name} - ${lang.language_code}`)
-								.join('\n');
-											
+									.map((lang) => `${lang.language_name} - ${lang.language_code}`)
+									.join("\n");
 
 								frappe.prompt(
 									[
@@ -166,8 +174,8 @@ $(document).ready(() => {
 										},
 									],
 									(values) => {
-										const selectedLanguage = values.language.split(' - ')[1];
-										
+										const selectedLanguage = values.language.split(" - ")[1];
+
 										console.log("Selected Language:", selectedLanguage);
 										frappe.call({
 											method: "frappe.client.set_value",
@@ -179,7 +187,11 @@ $(document).ready(() => {
 											},
 											callback: function () {
 												frappe.msgprint(
-													__("Language switched to " + values.language.split(' - ')[0] + ". Reloading...")
+													__(
+														"Language switched to " +
+															values.language.split(" - ")[0] +
+															". Reloading..."
+													)
 												);
 												location.reload();
 											},
@@ -296,7 +308,6 @@ $(document).ready(() => {
 	const mo = new MutationObserver(processAll);
 	mo.observe(document.body, { childList: true, subtree: true });
 })();
-
 
 // (function () {
 //   function addButton(input) {
