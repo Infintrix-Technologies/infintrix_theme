@@ -1,6 +1,6 @@
 {% macro logo_section(title=null) %}
 <div class="page-card-head">
-	<img width="50" class="app-logo" src="{{ logo }}">
+	<img class="app-logo" src="{{ logo }}">
 	{% if title %}
 	<h3>{{ _(title)}}</h3>
 	{% else %}
@@ -157,6 +157,9 @@
 		.social i {
 			margin-right: 4px;
 		}
+		.page-card-head img {
+    max-height: 42px;
+}
 	</style>
 
 
