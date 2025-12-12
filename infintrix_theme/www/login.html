@@ -1,444 +1,276 @@
-{% extends "templates/web.html" %}
-
-{% macro email_login_body() -%}
-<div class="page-card-body">
-    <div class="form-group">
-        <label class="input-label">{{ login_label or _("Email or Username")}}</label>
-        <div class="email-field input-wrapper">
-            <input type="text" id="login_email" class="form-control" placeholder="user@example.com" required autofocus>
-            <div class="icon-wrapper">
-                <svg class="field-icon email-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.5 7.65149V15.0757C2.5 15.4374 2.64367 15.7842 2.8994 16.04C3.15513 16.2957 3.50198 16.4394 3.86364 16.4394H16.1364C16.498 16.4394 16.8449 16.2957 17.1006 16.04C17.3563 15.7842 17.5 15.4374 17.5 15.0757V7.65149" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="square"/>
-                    <path d="M17.5 7.57572V5.53026C17.5 5.1686 17.3563 4.82176 17.1006 4.56603C16.8449 4.31029 16.498 4.16663 16.1364 4.16663H3.86364C3.50198 4.16663 3.15513 4.31029 2.8994 4.56603C2.64367 4.82176 2.5 5.1686 2.5 5.53026V7.57572L10 10.8333L17.5 7.57572Z" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="square"/>
-                </svg>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="input-label">{{ _("Password") }}</label>
-        <div class="password-field input-wrapper">
-            <input type="password" id="login_password" class="form-control" placeholder="••••••••" autocomplete="current-password" required>
-            <div class="icon-wrapper">
-                <svg class="field-icon password-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0961 1.93768H10.0264C8.94806 1.92763 7.90976 2.34591 7.13951 3.10075C6.36866 3.85619 5.9294 4.88687 5.91833 5.96612L5.91831 5.96612V5.97124V6.52695H4.3125C3.20793 6.52695 2.3125 7.42238 2.3125 8.52695V16.0165C2.3125 17.121 3.20793 18.0165 4.3125 18.0165H15.7356C16.8401 18.0165 17.7356 17.121 17.7356 16.0165V8.52695C17.7356 7.42238 16.8401 6.52695 15.7356 6.52695H14.1297V6.04576C14.1397 4.96742 13.7214 3.92913 12.9666 3.15888C12.2112 2.38803 11.1805 1.94877 10.1012 1.9377V1.93768H10.0961ZM13.1297 6.52695V6.04336V6.03838H13.1297C13.1378 5.22428 12.8222 4.44029 12.2524 3.85881C11.6831 3.27793 10.9067 2.94667 10.0934 2.93768H10.024H10.019V2.93765C9.20491 2.92955 8.42092 3.24512 7.83944 3.81497C7.25856 4.38423 6.9273 5.1607 6.91831 5.9739V6.52695H13.1297ZM4.3125 7.52695C3.76022 7.52695 3.3125 7.97467 3.3125 8.52695V16.0165C3.3125 16.5687 3.76022 17.0165 4.3125 17.0165H15.7356C16.2879 17.0165 16.7356 16.5687 16.7356 16.0165V8.52695C16.7356 7.97467 16.2879 7.52695 15.7356 7.52695H4.3125ZM10.0242 13.2384C10.5581 13.2384 10.9909 12.8056 10.9909 12.2717C10.9909 11.7377 10.5581 11.3049 10.0242 11.3049C9.49023 11.3049 9.05738 11.7377 9.05738 12.2717C9.05738 12.8056 9.49023 13.2384 10.0242 13.2384ZM11.9909 12.2717C11.9909 13.3579 11.1104 14.2384 10.0242 14.2384C8.93794 14.2384 8.05738 13.3579 8.05738 12.2717C8.05738 11.1854 8.93794 10.3049 10.0242 10.3049C11.1104 10.3049 11.9909 11.1854 11.9909 12.2717Z" fill="currentColor"/>
-                </svg>
-            </div>
-            <span toggle="#login_password" class="toggle-password text-muted">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-            </span>
-        </div>
-    </div>
-</div>
-
-<div class="page-card-actions">
-    <button class="btn btn-primary btn-block btn-login" type="submit"> {{ _("Login") }}</button>
-    {% if ldap_settings and ldap_settings.enabled %}
-    <button class="btn btn-default btn-block btn-login btn-ldap-login mt-2"> {{ _("Login with LDAP") }}</button>
-    {% endif %}
-    
-    <div class="forgot-password-message text-center mt-3">
-        <a href="#forgot">{{ _("Forgot Password?") }}</a>
-    </div>
-</div>
-{% endmacro %}
-
-{% block head_include %}
-<style>
-    /* MODERN LOGIN CSS OVERRIDE */
-    :root {
-        --primary: #2563eb;
-        --primary-dark: #1d4ed8;
-        --bg-color: #f1f5f9;
-        --card-bg: #ffffff;
-        --text-main: #1e293b;
-        --text-sub: #64748b;
-        --border-color: #e2e8f0;
-        --radius: 12px;
-    }
-
-    body {
-        background-color: var(--bg-color);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    /* Remove default header/footer */
-    header, footer, .web-footer { display: none !important; }
-    
-    /* Layout Reset */
-    .main-section { padding: 0 !important; margin: 0 !important; max-width: 100vw !important; }
-
-    /* Main Container */
-    .login-content.page-card {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        min-height: 100vh; /* Full Height */
-        margin: 0;
-        border: none;
-        box-shadow: none;
-        background: var(--card-bg);
-        border-radius: 0;
-    }
-
-    /* Left Side: Image/Brand */
-    .login-content-bg {
-        flex: 1.2;
-        background-color: #0f172a;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        overflow: hidden;
-    }
-
-    /* Target the image injected by JS */
-    .login-content-bg img.app-login-bg {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.8;
-        z-index: 0;
-    }
-
-    /* Overlay for text readability */
-    .login-content-bg::after {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: linear-gradient(180deg, rgba(15,23,42,0.4) 0%, rgba(15,23,42,0.9) 100%);
-        z-index: 1;
-    }
-    
-    /* The Copyright text injected by JS */
-    .login-copyrights {
-        position: relative;
-        z-index: 2;
-        color: rgba(255,255,255,0.6);
-        padding: 2rem;
-        font-size: 0.85rem;
-        text-align: left !important;
-    }
-    .login-copyrights a { color: white; text-decoration: none; font-weight: 500; }
-
-    /* Logo on Left Side */
-    .login-content-bg .app-logo {
-        display: none; /* Hide duplicate logo on image side */
-    }
-
-    /* Right Side: Form */
-    .login-content-form {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 4rem 5rem;
-        background: var(--card-bg);
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    /* Typography */
-    .page-card-head h2 {
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--text-main);
-        margin-bottom: 0.5rem;
-    }
-    
-    .page-card-head p {
-        color: var(--text-sub);
-        font-size: 1rem;
-        margin-bottom: 2.5rem;
-    }
-
-    /* Inputs */
-    .form-group { margin-bottom: 1.5rem; }
-    
-    .input-label {
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--text-main);
-        margin-bottom: 0.5rem;
-    }
-
-    .input-wrapper {
-        position: relative;
-    }
-
-    .form-control {
-        width: 100%;
-        height: 50px;
-        padding: 0 1rem 0 3rem !important; /* Space for icon */
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius);
-        background: #f8fafc;
-        font-size: 0.95rem;
-        transition: all 0.2s ease;
-        color: var(--text-main);
-    }
-
-    .form-control:focus {
-        background: #fff;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-        outline: none;
-    }
-
-    /* Icons */
-    .icon-wrapper {
-        position: absolute;
-        top: 0; left: 0; bottom: 0;
-        width: 3rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        pointer-events: none;
-        color: var(--text-sub);
-    }
-    
-    .field-icon path { stroke: currentColor; } /* Fix SVG color */
-
-    .toggle-password {
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        color: var(--text-sub);
-    }
-    
-    .toggle-password:hover { color: var(--primary); }
-
-    /* Buttons */
-    .btn-block { display: block; width: 100%; }
-    
-    .btn-login, .btn-signup, .btn-forgot {
-        height: 50px;
-        border-radius: var(--radius);
-        font-weight: 600;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        cursor: pointer;
-        transition: all 0.2s;
-    }
-
-    .btn-primary {
-        background-color: var(--primary);
-        color: white;
-        box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
-    }
-    
-    .btn-primary:hover {
-        background-color: var(--primary-dark);
-        transform: translateY(-1px);
-        box-shadow: 0 6px 8px -1px rgba(37, 99, 235, 0.3);
-    }
-
-    .btn-default {
-        background: white;
-        border: 1px solid var(--border-color);
-        color: var(--text-main);
-    }
-    
-    .btn-default:hover { background: #f8fafc; }
-
-    /* Links */
-    a { color: var(--primary); text-decoration: none; font-weight: 500; }
-    a:hover { text-decoration: underline; }
-
-    .forgot-password-message { font-size: 0.9rem; }
-    .sign-up-message { margin-top: 1.5rem; color: var(--text-sub); font-size: 0.9rem; }
-
-    /* Mobile Responsive */
-    @media (max-width: 991px) {
-        .login-content.page-card { flex-direction: column; }
-        .login-content-bg { display: none; /* Hide image on mobile for cleaner look */ }
-        .login-content-form { padding: 2rem; width: 100%; max-width: 100%; flex: 1; }
-        .page-card-head h2 { font-size: 1.75rem; }
-    }
-</style>
-{% endblock %}
-
-{% macro logo_section() %}
+{% macro logo_section(title=null) %}
 <div class="page-card-head">
-    <div class="text-left">
-        <img class="app-logo mb-4" src="{{ logo }}" style="max-height: 40px; width: auto;">
-        <h2>{{ _('Welcome Back')}}</h2>
-        <p>{{ _('Please enter your details to sign in.') }}</p>
-    </div>
+	<img width="50" class="app-logo" src="{{ logo }}">
+	{% if title %}
+	<h3>{{ _(title)}}</h3>
+	{% else %}
+	<h3>{{ _('Login to {0}').format(app_name or _("Frappe")) }}</h3>
+	{% endif %}
 </div>
 {% endmacro %}
 
-{% block page_content %}
-<div>
-	<noscript>
-		<div class="text-center my-5">
-			<h4>{{ _("Javascript is disabled on your browser") }}</h4>
-			<p class="text-muted"> {{ _("You need to enable JavaScript for your app to work.") }}</p>
-		</div>
-	</noscript>
+<!DOCTYPE html>
+<html lang="en">
 
-    <section class='for-login'>
-		<div class="login-content page-card">
-            <div class="login-content-bg">
-				<div data-action="login-api"></div>
-			</div>
-            
-            <div class="login-content-form">
-				{{ logo_section() }}
-				<form class="form-signin form-login" role="form">
-					{%- if social_login -%}
-					<div class="page-card-body">
-						{{ email_login_body() }}
-                        
-                        <div class="social-logins text-center mt-4">
-                            <p class="text-muted login-divider mb-3" style="font-size: 0.85rem;">{{ _("Or sign in with") }}</p>
-                            <div class="social-login-buttons">
-                                {% for provider in provider_logins %}
-                                <div class="login-button-wrapper mb-2">
-                                    <a href="{{ provider.auth_url }}"
-                                        class="btn btn-block btn-default btn-sm btn-login-option btn-{{ provider.name }}">
-                                        {% if provider.icon %} {{ provider.icon }} {% endif %}
-                                        {{ _("Login With {0}").format(provider.provider_name) }}
-                                    </a>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-					</div>
-					{% else %}
-						{{ email_login_body() }}
-					{%- endif -%}
-				</form>
-				
-				{%- if not disable_signup -%}
-				<div class="text-center sign-up-message">
-					{{ _("Don't have an account?") }}
-					<a href="#signup">{{ _("Create account") }}</a>
-				</div>
-				{%- endif -%}
-			</div>
-		</div>
-	</section>
+<head>
+	<!-- Design by foolishdeveloper.com -->
 
-	{%- if social_login -%}
-	<section class='for-email-login hide'>
-		<div class="login-content page-card">
-            <div class="login-content-bg"><div data-action="login-api"></div></div>
-            <div class="login-content-form">
-                {{ logo_section() }}
-                <form class="form-signin form-login" role="form">
-                {{ email_login_body() }}
-                </form>
-            </div>
-		</div>
-	</section>
-	{%- endif -%}
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!--Stylesheet-->
+	<style media="screen">
+		*,
+		*:before,
+		*:after {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
 
-    <section class='for-signup {{ "signup-disabled" if disable_signup else "" }} hide'>
-		<div class="login-content page-card">
-			<div class="login-content-bg">
-				<div data-action="login-api"></div>
-			</div>
-			<div class="login-content-form">
-				{%- if not disable_signup -%}
-					<div class="page-card-head">
-                        <img class="app-logo mb-4" src="{{ logo }}" style="max-height: 40px;">
-						<div class="text-left">
-							<h2>{{ _('Get Started')}}</h2>
-							<p>{{ _('Create a new account to access the platform.') }}</p>
-						</div>
-					</div>
-					<form class="form-signin form-signup" role="form">
-						<div class="page-card-body">
-							<div class="form-group">
-                                <label class="input-label">{{ _("Full Name") }}</label>
-								<div class="email-field input-wrapper">
-									<input type="text" id="signup_fullname" class="form-control" placeholder="John Doe" required autofocus>
-                                    <div class="icon-wrapper">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                    </div>
-								</div>
-							</div>
-							<div class="form-group">
-                                <label class="input-label">{{ _("Email Address") }}</label>
-								<div class="email-field input-wrapper">
-									<input type="email" id="signup_email" class="form-control" placeholder="user@example.com" required>
-									<div class="icon-wrapper">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                    </div>
-								</div>
-							</div>
-						</div>
-						<div class="page-card-actions mt-4">
-							<button class="btn btn-primary btn-block btn-signup" type="submit">{{ _("Sign up") }}</button>
-							<p class="text-center sign-up-message">
-								{{ _("Already have an account?") }} <a href="#login">{{ _("Login") }}</a>
-							</p>
-						</div>
-					</form>
-				{%- else -%}
-					<div class='page-card-head'>
-						<span class='indicator gray'>{{_("Signup Disabled")}}</span>
-					</div>
-					<p>{{_("Signups have been disabled for this website.")}}</p>
-					<div><a href='/' class='btn btn-primary btn-sm'>{{ _("Home") }}</a></div>
-				{%- endif -%}
-			</div>
-		</div>
-	</section>
+		body {
+			background-color: #080710 !important;
+		}
 
-    <section class='for-forgot hide'>
-		<div class="login-content page-card">
-			<div class="login-content-bg">
-				<div data-action="login-api"></div>
-			</div>
-			<div class="login-content-form">
-				<form class="form-signin form-forgot" role="form">
-					<div class="page-card-head">
-                        <img class="app-logo mb-4" src="{{ logo }}" style="max-height: 40px;">
-						<div class="text-left">
-							<h2>{{ _('Forgot Password?') }}</h2>
-							<p>{{ _('Enter your email to receive reset instructions.') }}</p>
-						</div>
-					</div>
-					<div class="page-card-body">
-						<div class="email-field input-wrapper">
-							<input type="email" id="forgot_email" class="form-control"
-								   placeholder="{{ _('Email Address') }}" required autofocus>
-							<div class="icon-wrapper">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            </div>
-						</div>
-					</div>
-					<div class="page-card-actions mt-4">
-						<button class="btn btn-primary btn-block btn-forgot" type="submit">{{ _("Reset Password") }}
-						</button>
-						<p class="text-center sign-up-message">
-							<a href="#login">{{ _("Back to Login") }}</a>
-						</p>
-					</div>
-				</form>
-			</div>
-		</div>
-	</section>
-</div>
-{% endblock %}
+		.background {
+			width: 430px;
+			height: 520px;
+			position: absolute;
+			transform: translate(-50%, -50%);
+			left: 50%;
+			top: 50%;
+		}
 
-{% block script %}
-<script>{% include "templates/includes/login/login.js" %}</script>
-<script>
-  // This is the obfuscated script provided in the original template
-  // It injects the Image and Copyrights into the .login-content-bg div
-  $('[data-action="login-api"]').html(unescape('%3c%69%6d%67%20%63%6c%61%73%73%3d%22%61%70%70%2d%6c%6f%67%69%6e%2d%62%67%22%20%73%72%63%3d%22%2f%61%73%73%65%74%73%2f%64%61%74%61%76%61%6c%75%65%5f%74%68%65%6d%65%5f%31%35%2f%69%6d%61%67%65%73%2f%65%72%70%6e%65%78%74%2d%68%65%72%6f%2d%63%6f%6d%70%72%65%73%73%65%64%2e%70%6e%67%22%3e%0d%0a%3c%64%69%76%20%63%6c%61%73%73%3d%22%74%65%78%74%2d%63%65%6e%74%65%72%20%6c%6f%67%69%6e%2d%63%6f%70%79%72%69%67%68%74%73%22%3e%50%6f%77%65%72%65%64%20%42%79%20%3c%61%20%68%72%65%66%3d%22%68%74%74%70%73%3a%2f%2f%69%6e%66%69%6e%74%72%69%78%74%65%63%68%2e%63%6f%6d%2f%22%20%74%61%72%67%65%74%3d%22%5f%62%6c%61%6e%6b%22%3e%49%6e%66%69%6e%74%72%69%78%20%54%65%63%68%6e%6f%6c%6f%67%69%65%73%3c%2f%61%3e%3c%2f%64%69%76%3e'));
-</script>
-{% endblock %}
+			
 
-{% block sidebar %}{% endblock %}
+		.background .shape {
+			height: 200px;
+			width: 200px;
+			position: absolute;
+			border-radius: 50%;
+		}
+
+		.shape:first-child {
+			background: linear-gradient(#1845ad, #23a2f6);
+			left: -80px;
+			top: -80px;
+		}
+
+		.shape:last-child {
+			background: linear-gradient(to right, #ff512f, #f09819);
+			right: -30px;
+			bottom: -80px;
+		}
+
+		form {
+			height: 520px;
+			width: 400px;
+			background-color: rgba(255, 255, 255, 0.13);
+			position: absolute;
+			transform: translate(-50%, -50%);
+			top: 50%;
+			left: 50%;
+			border-radius: 10px;
+			backdrop-filter: blur(10px);
+			border: 2px solid rgba(255, 255, 255, 0.1);
+			box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+			padding: 50px 35px;
+		}
+
+		form * {
+			font-family: "Poppins", sans-serif;
+			color: #ffffff;
+			letter-spacing: 0.5px;
+			outline: none;
+			border: none;
+		}
+
+		form h3 {
+			font-size: 16px;
+			font-weight: 500;
+			line-height: 42px;
+			text-align: start;
+			color: #ffffff;
+			margin-top: 0.5rem !important;
+			    margin-bottom: 0.5rem;
+		}
+
+		label {
+			display: block;
+			margin-top: 15px;
+			font-size: 16px;
+			font-weight: 500;
+		}
+
+		input {
+			display: block;
+			height: 50px;
+			width: 100%;
+			background-color: rgba(255, 255, 255, 0.07);
+			border-radius: 3px;
+			padding: 0 10px;
+			margin-top: 8px;
+			font-size: 14px;
+			font-weight: 300;
+		}
+
+		::placeholder {
+			color: #e5e5e5;
+		}
+
+		button {
+			margin-top: 30px !important;
+			width: 100%;
+			background-color: #ffffff;
+			color: #080710;
+			padding: 15px 0;
+			font-size: 18px;
+			font-weight: 600;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.social {
+			margin-top: 30px;
+			display: flex;
+		}
+
+		.social div {
+			background: red;
+			width: 150px;
+			border-radius: 3px;
+			padding: 5px 10px 10px 5px;
+			background-color: rgba(255, 255, 255, 0.27);
+			color: #eaf0fb;
+			text-align: center;
+		}
+
+		.social div:hover {
+			background-color: rgba(255, 255, 255, 0.47);
+		}
+
+		.social .fb {
+			margin-left: 25px;
+		}
+
+		.social i {
+			margin-right: 4px;
+		}
+	</style>
+
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="frappe">
+
+	{% block meta_block %}
+	{% include "templates/includes/meta_block.html" %}
+	{% endblock %}
+
+	<title>{% block title %}{{ title | striptags }}{% endblock %}</title>
+
+	{% block favicon %}
+	<link rel="shortcut icon" href="{{ (favicon or " /assets/frappe/images/frappe-favicon.svg") | abs_url }}"
+		type="image/x-icon">
+	{% endblock %}
+
+	{%- block head -%}
+	{% include "templates/includes/head.html" %}
+	{%- endblock -%}
+
+	{%- block head_include %}
+	{{ head_include or "" }}
+	{% endblock -%}
+
+	{%- block style %}
+	{% if colocated_css -%}
+	<style>
+		{
+				{
+				colocated_css
+			}
+		}
+	</style>
+	{%- endif %}
+	{%- endblock -%}
+
+	{% if boot.lang == "eo" %}
+	<script type="text/javascript">
+		var _jipt = [];
+		_jipt.push(['project', 'frappe']);
+	</script>
+	<script type="text/javascript" src="https://cdn.crowdin.com/jipt/jipt.js"></script>
+	{% endif %}
+
+	<script>
+		window.frappe = {};
+		frappe.ready_events = [];
+		frappe.ready = function (fn) {
+			frappe.ready_events.push(fn);
+		}
+		window.dev_server = {{ dev_server }};
+		window.socketio_port = {{ (frappe.socketio_port or 9000) }};
+		window.show_language_picker = {{ show_language_picker or 'false' }};
+	</script>
+
+</head>
+
+<body>
+	<div class="background">
+		<div class="shape"></div>
+		<div class="shape"></div>
+	</div>
+	<form class="form-signin form-login" role="form">
+		{{ logo_section() }}
+
+		<label for="login_email">{{ login_label or _("Email")}}</label>
+		<input type="text" id="login_email"
+			placeholder="{% if login_name_placeholder %}{{ login_name_placeholder  }}{% else %}{{ _('jane@example.com') }}{% endif %}"
+			id="login_email" required autofocus autocomplete="username" />
+
+		<label for="login_password">{{ _("Password") }}</label>
+		<input id="login_password" type="password" autocomplete="current-password" placeholder="•••••" id="password"
+			required />
+
+
+		{% if not disable_user_pass_login %}
+		<button class="btn-login" type="submit">
+			{{ _("Login") }}</button>
+		{% endif %}
+		{% if ldap_settings and ldap_settings.enabled %}
+		<button class="btn btn-sm {{ " btn-primary" if disable_user_pass_login else "btn-default" }} btn-block btn-login
+			btn-ldap-login">
+			{{ _("Login with LDAP") }}</button>
+		{% endif %}
+
+		<!-- <div class="social">
+				<div class="go"><i class="fab fa-google"></i> Google</div>
+				<div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
+			</div> -->
+	</form>
+	<script>{% include "templates/includes/login/login.js" %}</script>
+
+	<!-- js should be loaded in body! -->
+	<script>
+		frappe.boot = {{ boot | json }}
+		// for backward compatibility of some libs
+		frappe.sys_defaults = frappe.boot.sysdefaults;
+	</script>
+	{{ include_script('frappe-web.bundle.js') }}
+
+	{%- for link in web_include_js %}
+	{{ include_script(link) }}
+	{%- endfor -%}
+
+	{%- block script %}
+	{% if colocated_js -%}
+	<script>{ { colocated_js } }</script>
+	{%- endif %}
+	{%- endblock %}
+	<!-- csrf_token -->
+	{%- block body_include %}{{ body_include or "" }}{% endblock -%}
+
+</body>
+
+</html>
