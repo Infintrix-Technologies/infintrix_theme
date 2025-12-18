@@ -308,6 +308,48 @@ $(document).ready(() => {
 	const mo = new MutationObserver(processAll);
 	mo.observe(document.body, { childList: true, subtree: true });
 })();
+(function () {
+  const titleStyle = `
+    color: #00E5FF;
+    font-size: 28px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px #000;
+  `;
+
+  const textStyle = `
+    color: #B2EBF2;
+    font-size: 13px;
+  `;
+
+  const warnStyle = `
+    color: #FF5252;
+    font-size: 14px;
+    font-weight: bold;
+  `;
+
+  const linkStyle = `
+    color: #80DEEA;
+    font-size: 12px;
+    text-decoration: underline;
+  `;
+
+  console.clear();
+
+  console.log("%cInfintrix Technologies LLC", titleStyle);
+  console.log(
+    "%cERPNext Implementation • AI Automation • Custom Engineering Systems",
+    textStyle
+  );
+  console.log(
+    "%c⚠️  Unauthorized modification may break core business logic",
+    warnStyle
+  );
+  console.log(
+    "%chttps://infintrixtech.com",
+    linkStyle
+  );
+})();
+
 
 // (function () {
 //   function addButton(input) {
