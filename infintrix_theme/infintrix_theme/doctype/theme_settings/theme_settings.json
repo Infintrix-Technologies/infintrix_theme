@@ -5,6 +5,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "general_tab",
   "font_family",
   "color",
   "font_size",
@@ -12,7 +13,10 @@
   "light_logo",
   "dark_logo",
   "column_break_pfzv",
-  "font_preview"
+  "font_preview",
+  "login_page_tab",
+  "login_page_image",
+  "login_background_image"
  ],
  "fields": [
   {
@@ -65,13 +69,34 @@
    "fieldname": "dark_logo",
    "fieldtype": "Attach",
    "label": "Dark Logo"
+  },
+  {
+   "fieldname": "login_page_image",
+   "fieldtype": "Attach Image",
+   "label": "Login Page Main Image"
+  },
+  {
+   "fieldname": "general_tab",
+   "fieldtype": "Tab Break",
+   "label": "General"
+  },
+  {
+   "fieldname": "login_page_tab",
+   "fieldtype": "Tab Break",
+   "label": "Login Page"
+  },
+  {
+   "default": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop",
+   "fieldname": "login_background_image",
+   "fieldtype": "Attach Image",
+   "label": "Login Background Image"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-12-12 01:51:47.227079",
+ "modified": "2025-12-18 14:45:39.878573",
  "modified_by": "Administrator",
  "module": "Infintrix Theme",
  "name": "Theme Settings",

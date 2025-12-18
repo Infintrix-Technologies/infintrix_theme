@@ -39,6 +39,10 @@ def get_context(context):
 		if redirect_to != "login":
 			frappe.local.flags.redirect_location = redirect_to
 			raise frappe.Redirect
+		
+
+	theme_settings = frappe.get_single("Theme Settings")
+
 
 	context.no_header = True
 	context.for_test = "login.html"
@@ -52,6 +56,11 @@ def get_context(context):
 	context["app_name"] = (
 		frappe.get_website_settings("app_name") or frappe.get_system_settings("app_name") or _("Frappe")
 	)
+
+	context["login_page_image"] = theme_settings.login_page_image or None
+	context["login_background_image"] = theme_settings.login_background_image or None
+	context['theme_color'] = theme_settings.color or None
+	print("Login Image: ",theme_settings.login_background_image)
 
 	signup_form_template = frappe.get_hooks("signup_form_template")
 	if signup_form_template and len(signup_form_template):

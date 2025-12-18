@@ -1,11 +1,11 @@
 {% macro logo_section(title=null) %}
 <div class="page-card-head">
-	<img class="app-logo" src="{{ logo }}">
-	{% if title %}
-	<h3>{{ _(title)}}</h3>
-	{% else %}
-	<h3>{{ _('Login to {0}').format(app_name or _("Frappe")) }}</h3>
-	{% endif %}
+    <img class="app-logo" src="{{ logo }}">
+    {% if title %}
+    <h3>{{ _(title)}}</h3>
+    {% else %}
+    <h3>{{ _('Login to {0}').format(app_name or _("Frappe")) }}</h3>
+    {% endif %}
 </div>
 {% endmacro %}
 
@@ -13,266 +13,279 @@
 <html lang="en">
 
 <head>
-	<!-- Design by foolishdeveloper.com -->
+    <!-- Design by foolishdeveloper.com -->
 
-	<link rel="preconnect" href="https://fonts.gstatic.com" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<!--Stylesheet-->
-	<style media="screen">
-		*,
-		*:before,
-		*:after {
-			padding: 0;
-			margin: 0;
-			box-sizing: border-box;
-		}
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!--Stylesheet-->
+    <style media="screen">
+        *,
+        *:before,
+        *:after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
 
-		body {
-			background-color: #080710 !important;
-		}
+        body {
+            background-color:  color-mix(in srgb, {{ theme_color or '#000000' }} 10%, #080710 90%) !important;
+			background-image : url({{login_background_image}}) !important;
+            overflow-x: hidden;
+        }
 
-		.background {
-			width: 430px;
-			height: 520px;
-			position: absolute;
-			transform: translate(-50%, -50%);
-			left: 50%;
-			top: 50%;
-		}
+        .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+            z-index: -1;
+        }
 
-			
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
 
-		.background .shape {
-			height: 200px;
-			width: 200px;
-			position: absolute;
-			border-radius: 50%;
-		}
+        .shape:first-child {
+            background: linear-gradient(#1845ad, #23a2f6);
+            left: -80px;
+            top: -80px;
+        }
 
-		.shape:first-child {
-			background: linear-gradient(#1845ad, #23a2f6);
-			left: -80px;
-			top: -80px;
-		}
+        .shape:last-child {
+            background: linear-gradient(to right, #ff512f, #f09819);
+            right: -30px;
+            bottom: -80px;
+        }
 
-		.shape:last-child {
-			background: linear-gradient(to right, #ff512f, #f09819);
-			right: -30px;
-			bottom: -80px;
-		}
+        /* New Container to hold Image and Form side-by-side */
+         .login-wrapper {
+            width: 800px; /* 400px image + 400px form */
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            display: flex;
+            border-radius: 10px;
+            overflow: hidden; 
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            background-color: rgb(0 0 0 / 60%);
+        }
 
-		form {
-			height: 520px;
-			width: 400px;
-			background-color: rgba(255, 255, 255, 0.13);
-			position: absolute;
-			transform: translate(-50%, -50%);
-			top: 50%;
-			left: 50%;
-			border-radius: 10px;
-			backdrop-filter: blur(10px);
-			border: 2px solid rgba(255, 255, 255, 0.1);
-			box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-			padding: 50px 35px;
-		}
+        /* Image Section */
+        .login-image {
+            width: 400px;
+            height: 520px;
+            background-image: url({{ login_page_image or 'https://images.unsplash.com/photo-1606857521015-7f9fcf423740?q=80&w=2070&auto=format&fit=crop'}}); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-		form * {
-			font-family: "Poppins", sans-serif;
-			color: #ffffff;
-			letter-spacing: 0.5px;
-			outline: none;
-			border: none;
-		}
+        form {
+            height: 520px;
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.13);
+            padding: 50px 35px;
+        }
 
-		form h3 {
-			font-size: 16px;
-			font-weight: 500;
-			line-height: 42px;
-			text-align: start;
-			color: #ffffff;
-			margin-top: 0.5rem !important;
-			    margin-bottom: 0.5rem;
-		}
+        form * {
+            font-family: "Poppins", sans-serif;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
 
-		label {
-			display: block;
-			margin-top: 15px;
-			font-size: 16px;
-			font-weight: 500;
-		}
+        form h3 {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: start;
+            color: #ffffff;
+            margin-top: 0.5rem !important;
+            margin-bottom: 0.5rem;
+        }
 
-		input {
-			display: block;
-			height: 50px;
-			width: 100%;
-			background-color: rgba(255, 255, 255, 0.07);
-			border-radius: 3px;
-			padding: 0 10px;
-			margin-top: 8px;
-			font-size: 14px;
-			font-weight: 300;
-		}
+        label {
+            display: block;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: 500;
+        }
 
-		::placeholder {
-			color: #e5e5e5;
-		}
+        input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+        }
 
-		button {
-			margin-top: 30px !important;
-			width: 100%;
-			background-color: #ffffff;
-			color: #080710;
-			padding: 15px 0;
-			font-size: 18px;
-			font-weight: 600;
-			border-radius: 5px;
-			cursor: pointer;
-		}
+        ::placeholder {
+            color: #e5e5e5;
+        }
 
-		.social {
-			margin-top: 30px;
-			display: flex;
-		}
+        button {
+            margin-top: 30px !important;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-		.social div {
-			background: red;
-			width: 150px;
-			border-radius: 3px;
-			padding: 5px 10px 10px 5px;
-			background-color: rgba(255, 255, 255, 0.27);
-			color: #eaf0fb;
-			text-align: center;
-		}
+        .page-card-head img {
+            max-height: 42px;
+        }
 
-		.social div:hover {
-			background-color: rgba(255, 255, 255, 0.47);
-		}
+        /* Responsive: Stack on mobile */
+        @media (max-width: 820px) {
+            .login-wrapper {
+                width: 400px;
+                flex-direction: column;
+                height: auto;
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                margin: 50px auto;
+            }
+            .login-image {
+                display: none; /* Hide image on mobile to save space */
+            }
+            .background {
+                display: none;
+            }
+        }
+    </style>
 
-		.social .fb {
-			margin-left: 25px;
-		}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="generator" content="frappe">
 
-		.social i {
-			margin-right: 4px;
-		}
-		.page-card-head img {
-    max-height: 42px;
-}
-	</style>
+    {% block meta_block %}
+    {% include "templates/includes/meta_block.html" %}
+    {% endblock %}
 
+    <title>{% block title %}{{ title | striptags }}{% endblock %}</title>
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="generator" content="frappe">
+    {% block favicon %}
+    <link rel="shortcut icon" href="{{ (favicon or "/assets/frappe/images/frappe-favicon.svg") | abs_url }}"
+        type="image/x-icon">
+    {% endblock %}
 
-	{% block meta_block %}
-	{% include "templates/includes/meta_block.html" %}
-	{% endblock %}
+    {%- block head -%}
+    {% include "templates/includes/head.html" %}
+    {%- endblock -%}
 
-	<title>{% block title %}{{ title | striptags }}{% endblock %}</title>
+    {%- block head_include %}
+    {{ head_include or "" }}
+    {% endblock -%}
 
-	{% block favicon %}
-	<link rel="shortcut icon" href="{{ (favicon or " /assets/frappe/images/frappe-favicon.svg") | abs_url }}"
-		type="image/x-icon">
-	{% endblock %}
+    {%- block style %}
+    {% if colocated_css -%}
+    <style>
+        {{ colocated_css }}
+    </style>
+    {%- endif %}
+    {%- endblock -%}
 
-	{%- block head -%}
-	{% include "templates/includes/head.html" %}
-	{%- endblock -%}
+    {% if boot.lang == "eo" %}
+    <script type="text/javascript">
+        var _jipt = [];
+        _jipt.push(['project', 'frappe']);
+    </script>
+    <script type="text/javascript" src="https://cdn.crowdin.com/jipt/jipt.js"></script>
+    {% endif %}
 
-	{%- block head_include %}
-	{{ head_include or "" }}
-	{% endblock -%}
-
-	{%- block style %}
-	{% if colocated_css -%}
-	<style>
-		{
-				{
-				colocated_css
-			}
-		}
-	</style>
-	{%- endif %}
-	{%- endblock -%}
-
-	{% if boot.lang == "eo" %}
-	<script type="text/javascript">
-		var _jipt = [];
-		_jipt.push(['project', 'frappe']);
-	</script>
-	<script type="text/javascript" src="https://cdn.crowdin.com/jipt/jipt.js"></script>
-	{% endif %}
-
-	<script>
-		window.frappe = {};
-		frappe.ready_events = [];
-		frappe.ready = function (fn) {
-			frappe.ready_events.push(fn);
-		}
-		window.dev_server = {{ dev_server }};
-		window.socketio_port = {{ (frappe.socketio_port or 9000) }};
-		window.show_language_picker = {{ show_language_picker or 'false' }};
-	</script>
+    <script>
+        window.frappe = {};
+        frappe.ready_events = [];
+        frappe.ready = function (fn) {
+            frappe.ready_events.push(fn);
+        }
+        window.dev_server = {{ dev_server }};
+        window.socketio_port = {{ (frappe.socketio_port or 9000) }};
+        window.show_language_picker = {{ show_language_picker or 'false' }};
+    </script>
 
 </head>
 
 <body>
-	<div class="background">
-		<div class="shape"></div>
-		<div class="shape"></div>
-	</div>
-	<form class="form-signin form-login" role="form">
-		{{ logo_section() }}
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <div class="login-wrapper">
+        <!-- Left Side Image -->
+        <div class="login-image"></div>
 
-		<label for="login_email">{{ login_label or _("Email")}}</label>
-		<input type="text" id="login_email"
-			placeholder="{% if login_name_placeholder %}{{ login_name_placeholder  }}{% else %}{{ _('jane@example.com') }}{% endif %}"
-			id="login_email" required autofocus autocomplete="username" />
+        <!-- Right Side Form -->
+        <form class="form-signin form-login" role="form">
+            {{ logo_section() }}
 
-		<label for="login_password">{{ _("Password") }}</label>
-		<input id="login_password" type="password" autocomplete="current-password" placeholder="•••••" id="password"
-			required />
+            <label for="login_email">{{ login_label or _("Email")}}</label>
+            <input type="text" id="login_email"
+                placeholder="{% if login_name_placeholder %}{{ login_name_placeholder }}{% else %}{{ _('jane@example.com') }}{% endif %}"
+                required autofocus autocomplete="username" />
 
+            <label for="login_password">{{ _("Password") }}</label>
+            <input id="login_password" type="password" autocomplete="current-password" placeholder="•••••"
+                required />
 
-		{% if not disable_user_pass_login %}
-		<button class="btn-login" type="submit">
-			{{ _("Login") }}</button>
-		{% endif %}
-		{% if ldap_settings and ldap_settings.enabled %}
-		<button class="btn btn-sm {{ " btn-primary" if disable_user_pass_login else "btn-default" }} btn-block btn-login
-			btn-ldap-login">
-			{{ _("Login with LDAP") }}</button>
-		{% endif %}
+            {% if not disable_user_pass_login %}
+            <button class="btn-login" type="submit">{{ _("Login") }}</button>
+            {% endif %}
 
-		<!-- <div class="social">
-				<div class="go"><i class="fab fa-google"></i> Google</div>
-				<div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
-			</div> -->
-	</form>
-	<script>{% include "templates/includes/login/login.js" %}</script>
+            {% if ldap_settings and ldap_settings.enabled %}
+            <button class="btn btn-sm {{ 'btn-primary' if disable_user_pass_login else 'btn-default' }} btn-block btn-login btn-ldap-login">
+                {{ _("Login with LDAP") }}
+            </button>
+            {% endif %}
+        </form>
+    </div>
 
-	<!-- js should be loaded in body! -->
-	<script>
-		frappe.boot = {{ boot | json }}
-		// for backward compatibility of some libs
-		frappe.sys_defaults = frappe.boot.sysdefaults;
-	</script>
-	{{ include_script('frappe-web.bundle.js') }}
+    <script>{% include "templates/includes/login/login.js" %}</script>
 
-	{%- for link in web_include_js %}
-	{{ include_script(link) }}
-	{%- endfor -%}
+    <!-- js should be loaded in body! -->
+    <script>
+        frappe.boot = {{ boot | json }}
+        // for backward compatibility of some libs
+        frappe.sys_defaults = frappe.boot.sysdefaults;
+    </script>
+    {{ include_script('frappe-web.bundle.js') }}
 
-	{%- block script %}
-	{% if colocated_js -%}
-	<script>{ { colocated_js } }</script>
-	{%- endif %}
-	{%- endblock %}
-	<!-- csrf_token -->
-	{%- block body_include %}{{ body_include or "" }}{% endblock -%}
+    {%- for link in web_include_js %}
+    {{ include_script(link) }}
+    {%- endfor -%}
+
+    {%- block script %}
+    {% if colocated_js -%}
+    <script>{{ colocated_js }}</script>
+    {%- endif %}
+    {%- endblock %}
+    
+    <!-- csrf_token -->
+    {%- block body_include %}{{ body_include or "" }}{% endblock -%}
 
 </body>
 
