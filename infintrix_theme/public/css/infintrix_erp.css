@@ -58,8 +58,9 @@ body.full-width .container {
 .like-disabled-input {
     border-radius: 4px !important;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    /* height: 32px !important; */
-    /* padding: 6px 10px !important; */
+    border-bottom: 1px solid var(--primary);
+    color: var(--text-primary) !important;
+    box-shadow: var(--fluent-shadow-sm) !important;
 }
 
 /* --- Buttons --- */
@@ -456,9 +457,9 @@ mark {
 button.btn-primary * {
     color: var(--fluent-surface);
 }
-button.btn {
-    border: 0.7px solid var(--primary);
-}
+
+
+
 input[data-fieldtype="Table MultiSelect"] {
     border: none !important;
 }
@@ -504,20 +505,24 @@ input[data-fieldtype="Table MultiSelect"] {
     border: 1px solid var(--primary) !important;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: var(--primary) !important;
 }
+
 button.btn.btn-secondary.action-btn {
     border: 0.5px solid var(--primary) !important;
 }
-.new-timeline .activity-title h4, .new-timeline .timeline-actions h4 {
+
+.new-timeline .activity-title h4,
+.new-timeline .timeline-actions h4 {
     /* flex: auto;
     margin-bottom: 0;
     font-weight: 700; */
     padding-left: 14px !important;
 }
 
-.new-timeline .activity-title, .new-timeline .timeline-actions {
+.new-timeline .activity-title,
+.new-timeline .timeline-actions {
     /* margin-bottom: 0 !important;
     display: flex;
     align-items: center;

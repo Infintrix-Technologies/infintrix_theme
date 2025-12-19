@@ -65,14 +65,17 @@
     .frappe-control .control-label {
         color: var(--text-secondary);
     }
-
+    
+.form-control:focus {
+    color: var(--text-color);
+    background-color: var(--control-bg);
+    border-color: var(--gray-500);
+}
     .form-control,
     .awesomplete>input,
     .like-disabled-input {
         background-color: color-mix(in srgb, var(--control-bg) 98%, var(--primary) 2%);
-        border: 0.5px solid var(--primary);
-        color: var(--text-primary) !important;
-        box-shadow: var(--fluent-shadow-sm) !important;
+       
     }
 
     .form-control:focus,
